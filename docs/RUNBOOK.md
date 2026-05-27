@@ -20,6 +20,12 @@ cd "C:\cutting video\douyin_creator_tracker"
 python douyin_creator_tracker.py --profile-url "https://v.douyin.com/yrNAdFgturw/" --all --humanize --out "outputs\douyin_creator_tracker_current_creator_all_discoverable.xlsx" --evidence-dir "evidence\douyin_creator_tracker_current_creator_all_discoverable" --retries 1
 ```
 
+多达人增量批量采集：
+
+```powershell
+python douyin_creator_tracker.py --profile-list "profiles.txt" --all --humanize --incremental --close-extra-tabs --out "outputs\douyin_batch.xlsx" --evidence-dir "evidence\douyin_batch" --retries 1
+```
+
 ## 故障处理
 
 ### CDP 连接失败
@@ -47,6 +53,12 @@ python douyin_creator_tracker.py --profile-url "https://v.douyin.com/yrNAdFgturw
 ### 出现很多标签
 
 历史原因是旧版本每次连接 CDP 都新建标签。当前版本已修复为优先复用现有 Douyin 标签。旧标签可手动关闭或重启 Chrome 清理。
+
+运行时可加：
+
+```powershell
+--close-extra-tabs --max-tabs 3
+```
 
 ### 商品 ID 为空
 

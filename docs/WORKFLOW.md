@@ -54,3 +54,21 @@ python douyin_creator_tracker.py --profile-url "https://v.douyin.com/yrNAdFgturw
 2. 每个达人一个输出 Excel。
 3. 每个达人一个 evidence 子目录。
 4. 一个达人结束并验收后，再跑下一个达人。
+
+批量入口：
+
+```powershell
+python douyin_creator_tracker.py --profile-list "profiles.txt" --all --humanize --incremental --close-extra-tabs --out "outputs\douyin_batch.xlsx" --evidence-dir "evidence\douyin_batch" --retries 1
+```
+
+## 7. 增量采集
+
+启用 `--incremental` 后，脚本会读取 `outputs/collected_index.json`，跳过已采集过的 `video_id`。每条视频采集完成后立即更新索引。
+
+状态区分：
+
+- `ok`：采到有效商品或正常完成。
+- `ok_no_product_detected`：视频文本不像带货内容，未发现商品。
+- `partial_product_not_exposed`：视频文本像带货内容，但网络和商品卡都未暴露有效商品 ID。
+- `partial_login_required_for_product`：疑似登录态或商品卡渲染问题。
+- `failed`：单条失败，任务继续。

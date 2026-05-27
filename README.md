@@ -74,6 +74,20 @@ python douyin_creator_tracker.py --profile-url "https://v.douyin.com/yrNAdFgturw
 python douyin_creator_tracker.py --profile-url "https://v.douyin.com/yrNAdFgturw/" --limit 20 --humanize --out "outputs\douyin_creator_tracker_limit20.xlsx" --evidence-dir "evidence\douyin_creator_tracker_limit20"
 ```
 
+多达人批量增量采集：
+
+```powershell
+python douyin_creator_tracker.py --profile-list "profiles.txt" --all --humanize --incremental --close-extra-tabs --out "outputs\douyin_batch.xlsx" --evidence-dir "evidence\douyin_batch" --retries 1
+```
+
+`profiles.txt` 每行一个达人链接；空行和 `#` 开头的注释会跳过。增量索引默认写入 `outputs/collected_index.json`，已采集过的 `video_id` 会跳过。
+
+清理多余 Douyin 标签：
+
+```powershell
+python douyin_creator_tracker.py --profile-url "https://v.douyin.com/yrNAdFgturw/" --limit 5 --close-extra-tabs --max-tabs 3
+```
+
 只采一个视频：
 
 ```powershell

@@ -33,6 +33,7 @@ DEFAULT_CDP_URL = "http://127.0.0.1:9222"
 PROJECT_DIR = Path(__file__).resolve().parent
 DEFAULT_OUTPUT_PATH = PROJECT_DIR / "outputs" / "douyin_creator_tracker.xlsx"
 DEFAULT_EVIDENCE_DIR = PROJECT_DIR / "evidence" / "run"
+DEFAULT_INCREMENTAL_DB = PROJECT_DIR / "outputs" / "collected_index.json"
 JSON_URL_KEYWORDS = (
     "aweme",
     "post",
@@ -134,6 +135,13 @@ def http_json(url: str, method: str = "GET") -> Any:
     opener = request.build_opener(request.ProxyHandler({}))
     with opener.open(req, timeout=10) as resp:
         return json.loads(resp.read().decode("utf-8", errors="replace"))
+
+
+def http_text(url: str, method: str = "GET") -> str:
+    req = request.Request(url, method=method)
+    opener = request.build_opener(request.ProxyHandler({}))
+    with opener.open(req, timeout=10) as resp:
+        return resp.read().decode("utf-8", errors="replace")
 
 
 def normalize_cdp_url(url: str) -> str:
@@ -491,6 +499,36 @@ def connect_or_create_tab(cdp_url: str, initial_url: str, log_path: Path) -> Cdp
     page = CdpPage(ws_url, log_path)
     page.setup()
     return page
+
+
+def close_extra_douyin_tabs(cdp_url: str, keep_url_hint: str = "", max_tabs: int = 3, log=None) -> None:
+    cdp_url = normalize_cdp_url(cdp_url)
+    try:
+        targets = http_json(f"{cdp_url}/json/list")
+    except Exception as exc:
+        if log:
+            log(f"close_extra_tabs skipped: {exc}")
+        return
+    pages = [t for t in targets if t.get("type") == "page" and "douyin.com" in (t.get("url") or "")]
+    if len(pages) <= max_tabs:
+        return
+    def score(tab: dict[str, Any]) -> tuple[int, int]:
+        url = tab.get("url") or ""
+        keep = 1 if keep_url_hint and keep_url_hint in url else 0
+        user = 1 if "/user/" in url else 0
+        return keep, user
+    pages = sorted(pages, key=score, reverse=True)
+    for tab in pages[max_tabs:]:
+        tab_id = tab.get("id")
+        if not tab_id:
+            continue
+        try:
+            http_text(f"{cdp_url}/json/close/{parse.quote(tab_id, safe='')}")
+            if log:
+                log(f"closed extra Douyin tab: {tab.get('title', '')[:50]} {tab.get('url', '')[:120]}")
+        except Exception as exc:
+            if log:
+                log(f"failed closing tab {tab_id}: {exc}")
 
 
 def resolve_profile_url(page: CdpPage, url: str, timeout: float = 25) -> str:
@@ -888,6 +926,15 @@ def product_matches_video_text(product: ProductInfo, title: str) -> bool:
     return any(word in title and word in name for word in keywords)
 
 
+def title_suggests_commerce(title: str) -> bool:
+    return bool(
+        re.search(
+            r"(买|入|价格|质量|舒服|好穿|孕妇裤|孕妇裙|孕妇装|短裤|阔腿裤|半身裙|托腹|冰丝|凉感|休闲裤|外穿)",
+            title or "",
+        )
+    )
+
+
 def collect_video_detail(
     page: CdpPage,
     video: VideoCandidate,
@@ -936,6 +983,11 @@ def collect_video_detail(
                 base["collect_status"] = "partial_login_required_for_product"
                 base["error_message"] = "Chrome profile is not logged in or product card is hidden; product fields are unknown."
                 return [{**base, "has_product": "", "product_name": "", "product_id": "", "product_url": ""}]
+            if title_suggests_commerce(base["video_title"]):
+                base["collect_status"] = "partial_product_not_exposed"
+                base["error_message"] = "Video text looks commerce-related, but no valid product id was exposed after network and card extraction."
+                return [{**base, "has_product": "", "product_name": "", "product_id": "", "product_url": ""}]
+            base["collect_status"] = "ok_no_product_detected"
             return [{**base, "has_product": False, "product_name": "", "product_id": "", "product_url": ""}]
         return [
             {
@@ -1063,9 +1115,68 @@ def rows_from_har(har_path: Path, video_id: str, source_url: str) -> list[dict[s
     ]
 
 
+def load_profile_urls(profile_url: str, profile_list: Path | None) -> list[str]:
+    urls: list[str] = []
+    if profile_list:
+        for line in profile_list.read_text(encoding="utf-8", errors="replace").splitlines():
+            value = line.strip()
+            if not value or value.startswith("#"):
+                continue
+            urls.append(value)
+    if profile_url:
+        urls.insert(0, profile_url)
+    out: list[str] = []
+    seen: set[str] = set()
+    for url in urls:
+        if url not in seen:
+            seen.add(url)
+            out.append(url)
+    return out
+
+
+def load_incremental_index(path: Path) -> dict[str, Any]:
+    if not path.exists():
+        return {"videos": {}, "profiles": {}}
+    try:
+        data = json.loads(path.read_text(encoding="utf-8"))
+        if isinstance(data, dict):
+            data.setdefault("videos", {})
+            data.setdefault("profiles", {})
+            return data
+    except Exception:
+        pass
+    return {"videos": {}, "profiles": {}}
+
+
+def save_incremental_index(path: Path, data: dict[str, Any]) -> None:
+    ensure_dir(path.parent)
+    path.write_text(json.dumps(data, ensure_ascii=False, indent=2), encoding="utf-8")
+
+
+def mark_rows_in_index(index: dict[str, Any], profile_url: str, rows: list[dict[str, Any]]) -> None:
+    profile_bucket = index.setdefault("profiles", {}).setdefault(profile_url, {"video_ids": []})
+    profile_ids = set(profile_bucket.get("video_ids") or [])
+    videos = index.setdefault("videos", {})
+    for row in rows:
+        video_id = str(row.get("video_id") or "")
+        if not video_id:
+            continue
+        profile_ids.add(video_id)
+        videos[video_id] = {
+            "profile_url": profile_url,
+            "video_url": row.get("video_url", ""),
+            "video_title": row.get("video_title", ""),
+            "product_id": row.get("product_id", ""),
+            "collect_status": row.get("collect_status", ""),
+            "collect_time": row.get("collect_time", ""),
+        }
+    profile_bucket["video_ids"] = sorted(profile_ids)
+
+
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Track Douyin creator video commerce data through Chrome CDP.")
     parser.add_argument("--profile-url", default=DEFAULT_PROFILE_URL, help="Douyin creator profile URL or short URL")
+    parser.add_argument("--profile-list", type=Path, help="Text file with one creator profile URL per line")
     parser.add_argument("--video-id", default="", help="Optional target video id, used by --har parsing")
     parser.add_argument("--target-video-id", default="", help="Only collect this video id from the creator profile")
     parser.add_argument("--har", type=Path, help="Parse a Chrome DevTools HAR export instead of connecting to CDP")
@@ -1075,6 +1186,10 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--min-delay", type=float, default=3.0, help="Minimum random delay seconds when --humanize is enabled")
     parser.add_argument("--max-delay", type=float, default=9.0, help="Maximum random delay seconds when --humanize is enabled")
     parser.add_argument("--retries", type=int, default=1, help="Retry count for a failed video after reconnecting CDP")
+    parser.add_argument("--incremental", action="store_true", help="Skip videos already recorded in the incremental index")
+    parser.add_argument("--incremental-db", type=Path, default=DEFAULT_INCREMENTAL_DB, help="Incremental index JSON path")
+    parser.add_argument("--close-extra-tabs", action="store_true", help="Close extra Douyin tabs before/after each creator run")
+    parser.add_argument("--max-tabs", type=int, default=3, help="Maximum Douyin tabs to keep when --close-extra-tabs is enabled")
     parser.add_argument("--out", type=Path, default=DEFAULT_OUTPUT_PATH, help="Output .xlsx path")
     parser.add_argument("--cdp-url", default=DEFAULT_CDP_URL, help="Chrome CDP URL, default http://127.0.0.1:9222")
     parser.add_argument("--evidence-dir", type=Path, default=DEFAULT_EVIDENCE_DIR, help="Log/screenshot directory")
@@ -1103,73 +1218,98 @@ def main() -> int:
             log(f"done rows={len(rows)}")
             return 0
 
+        profile_urls = load_profile_urls(args.profile_url, args.profile_list)
+        if not profile_urls:
+            raise CdpError("No creator profile URL provided")
+        incremental_index = load_incremental_index(args.incremental_db) if args.incremental else {"videos": {}, "profiles": {}}
+        skipped_existing = set(incremental_index.get("videos", {}).keys()) if args.incremental else set()
+
         log(f"connecting Chrome CDP: {args.cdp_url}")
-        page = connect_or_create_tab(args.cdp_url, args.profile_url, log_path)
-        log(f"opening profile: {args.profile_url}")
-        final_profile_url = resolve_profile_url(page, args.profile_url)
-        if not final_profile_url:
-            raise CdpError("profile URL resolution returned empty URL")
-        if "captcha" in final_profile_url.lower():
-            raise CdpError(f"captcha page detected: {final_profile_url}")
-        log(f"resolved profile URL: {final_profile_url}")
-        creator_name = get_creator_name(page)
-        log(f"creator name: {creator_name or '(unknown)'}")
-
-        requested_limit = 0 if args.all else args.limit
-        videos = collect_profile_videos(
-            page,
-            requested_limit,
-            log,
-            args.target_video_id,
-            args.humanize,
-            args.min_delay,
-            args.max_delay,
-        )
-        if not videos:
-            if args.target_video_id:
-                raise CdpError(f"Target video card not found on profile page: {args.target_video_id}")
-            raise CdpError("No video cards found on profile page. Check login, page layout, or anti-bot prompt.")
-        log(f"collected video cards: {len(videos)}")
-
-        for idx, video in enumerate(videos, start=1):
-            log(f"collecting video {idx}/{len(videos)}: {video.video_id or video.video_url}")
-            if idx > 1:
-                try:
-                    page.navigate(final_profile_url, wait_seconds=2)
-                    human_profile_idle(page, args.humanize, args.min_delay, args.max_delay, log)
-                except Exception as exc:
-                    log(f"profile idle before video skipped: {exc}")
-            attempt = 0
-            while True:
-                video_rows = collect_video_detail(
-                    page=page,
-                    video=video,
-                    creator_name=creator_name,
-                    profile_url=final_profile_url,
-                    source_url=args.profile_url,
-                    evidence_dir=args.evidence_dir,
-                    humanize=args.humanize,
-                    min_delay=args.min_delay,
-                    max_delay=args.max_delay,
-                    log=log,
-                )
-                failed = video_rows and video_rows[0].get("collect_status") == "failed"
-                error_message = video_rows[0].get("error_message", "") if video_rows else ""
-                retryable = "CDP timeout" in error_message or "CdpError" in error_message
-                if not failed or not retryable or attempt >= args.retries:
-                    break
-                attempt += 1
-                log(f"retrying video after CDP reconnect attempt={attempt}: {video.video_id or video.video_url}")
+        for profile_no, source_profile_url in enumerate(profile_urls, start=1):
+            if args.close_extra_tabs:
+                close_extra_douyin_tabs(args.cdp_url, source_profile_url, args.max_tabs, log)
+            if page:
                 try:
                     page.close()
                 except Exception:
                     pass
-                page = connect_or_create_tab(args.cdp_url, final_profile_url, log_path)
-                page.navigate(final_profile_url, wait_seconds=2)
-            rows.extend(video_rows)
-            log(f"video {idx} rows={len(video_rows)} status={video_rows[0].get('collect_status')}")
-            write_excel(rows, args.out)
-            log(f"checkpoint wrote Excel rows={len(rows)}: {args.out.resolve()}")
+            page = connect_or_create_tab(args.cdp_url, source_profile_url, log_path)
+            log(f"opening profile {profile_no}/{len(profile_urls)}: {source_profile_url}")
+            final_profile_url = resolve_profile_url(page, source_profile_url)
+            if not final_profile_url:
+                raise CdpError("profile URL resolution returned empty URL")
+            if "captcha" in final_profile_url.lower():
+                raise CdpError(f"captcha page detected: {final_profile_url}")
+            log(f"resolved profile URL: {final_profile_url}")
+            creator_name = get_creator_name(page)
+            log(f"creator name: {creator_name or '(unknown)'}")
+
+            requested_limit = 0 if args.all else args.limit
+            videos = collect_profile_videos(
+                page,
+                requested_limit,
+                log,
+                args.target_video_id,
+                args.humanize,
+                args.min_delay,
+                args.max_delay,
+            )
+            if args.incremental:
+                before_count = len(videos)
+                videos = [v for v in videos if (v.video_id or find_video_id(v.video_url, v.title_hint)) not in skipped_existing]
+                log(f"incremental skipped existing videos: {before_count - len(videos)}")
+            if not videos:
+                if args.target_video_id:
+                    raise CdpError(f"Target video card not found or already collected: {args.target_video_id}")
+                log("no new video cards found for this profile")
+                continue
+            log(f"collected video cards: {len(videos)}")
+
+            for idx, video in enumerate(videos, start=1):
+                log(f"collecting profile {profile_no}/{len(profile_urls)} video {idx}/{len(videos)}: {video.video_id or video.video_url}")
+                if idx > 1:
+                    try:
+                        page.navigate(final_profile_url, wait_seconds=2)
+                        human_profile_idle(page, args.humanize, args.min_delay, args.max_delay, log)
+                    except Exception as exc:
+                        log(f"profile idle before video skipped: {exc}")
+                attempt = 0
+                while True:
+                    video_rows = collect_video_detail(
+                        page=page,
+                        video=video,
+                        creator_name=creator_name,
+                        profile_url=final_profile_url,
+                        source_url=source_profile_url,
+                        evidence_dir=args.evidence_dir,
+                        humanize=args.humanize,
+                        min_delay=args.min_delay,
+                        max_delay=args.max_delay,
+                        log=log,
+                    )
+                    failed = video_rows and video_rows[0].get("collect_status") == "failed"
+                    error_message = video_rows[0].get("error_message", "") if video_rows else ""
+                    retryable = "CDP timeout" in error_message or "CdpError" in error_message
+                    if not failed or not retryable or attempt >= args.retries:
+                        break
+                    attempt += 1
+                    log(f"retrying video after CDP reconnect attempt={attempt}: {video.video_id or video.video_url}")
+                    try:
+                        page.close()
+                    except Exception:
+                        pass
+                    page = connect_or_create_tab(args.cdp_url, final_profile_url, log_path)
+                    page.navigate(final_profile_url, wait_seconds=2)
+                rows.extend(video_rows)
+                if args.incremental:
+                    mark_rows_in_index(incremental_index, final_profile_url, video_rows)
+                    save_incremental_index(args.incremental_db, incremental_index)
+                    skipped_existing.update(str(r.get("video_id") or "") for r in video_rows if r.get("video_id"))
+                log(f"video {idx} rows={len(video_rows)} status={video_rows[0].get('collect_status')}")
+                write_excel(rows, args.out)
+                log(f"checkpoint wrote Excel rows={len(rows)}: {args.out.resolve()}")
+            if args.close_extra_tabs:
+                close_extra_douyin_tabs(args.cdp_url, final_profile_url, args.max_tabs, log)
 
         write_excel(rows, args.out)
         log(f"wrote Excel: {args.out.resolve()}")

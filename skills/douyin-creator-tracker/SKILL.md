@@ -27,6 +27,7 @@ Typical requests:
 - Use Google Chrome Stable launched with CDP.
 - Reuse the user's logged-in Chrome profile.
 - Reuse one Douyin tab sequentially; do not open one tab per video.
+- Up to 5 tabs is acceptable only when necessary, and extra Douyin tabs should be closed after collection.
 - Do not click payment, follow, private message, or account-changing actions.
 - Keep `outputs/` and `evidence/` local; do not commit them.
 
@@ -44,6 +45,12 @@ Run current creator all discoverable works:
 
 ```powershell
 python douyin_creator_tracker.py --profile-url "https://v.douyin.com/yrNAdFgturw/" --all --humanize --out "outputs\douyin_creator_tracker_current_creator_all_discoverable.xlsx" --evidence-dir "evidence\douyin_creator_tracker_current_creator_all_discoverable" --retries 1
+```
+
+Run multiple creators incrementally:
+
+```powershell
+python douyin_creator_tracker.py --profile-list "profiles.txt" --all --humanize --incremental --close-extra-tabs --out "outputs\douyin_batch.xlsx" --evidence-dir "evidence\douyin_batch" --retries 1
 ```
 
 ## Validation
