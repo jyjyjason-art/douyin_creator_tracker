@@ -30,6 +30,7 @@ Typical requests:
 - Up to 5 tabs is acceptable only when necessary, and extra Douyin tabs should be closed after collection.
 - Do not click payment, follow, private message, or account-changing actions.
 - Keep `outputs/` and `evidence/` local; do not commit them.
+- Keep Windows awake during long collection runs. The tracker does this by default; for an already-running old process, start `python keep_awake.py`.
 
 ## Standard commands
 

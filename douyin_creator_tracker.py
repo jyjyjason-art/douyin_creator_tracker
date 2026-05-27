@@ -18,6 +18,7 @@ import threading
 import time
 import traceback
 import base64
+import ctypes
 from dataclasses import dataclass
 from datetime import datetime
 from pathlib import Path
@@ -34,6 +35,10 @@ PROJECT_DIR = Path(__file__).resolve().parent
 DEFAULT_OUTPUT_PATH = PROJECT_DIR / "outputs" / "douyin_creator_tracker.xlsx"
 DEFAULT_EVIDENCE_DIR = PROJECT_DIR / "evidence" / "run"
 DEFAULT_INCREMENTAL_DB = PROJECT_DIR / "outputs" / "collected_index.json"
+ES_CONTINUOUS = 0x80000000
+ES_SYSTEM_REQUIRED = 0x00000001
+ES_DISPLAY_REQUIRED = 0x00000002
+ES_AWAYMODE_REQUIRED = 0x00000040
 JSON_URL_KEYWORDS = (
     "aweme",
     "post",
@@ -124,6 +129,48 @@ def human_pause(enabled: bool, min_seconds: float, max_seconds: float, log=None,
     if log:
         log(f"humanize {reason}: sleep {seconds:.1f}s")
     time.sleep(seconds)
+
+
+def request_keep_awake(log=None) -> bool:
+    if os.name != "nt":
+        return False
+    try:
+        flags = ES_CONTINUOUS | ES_SYSTEM_REQUIRED | ES_DISPLAY_REQUIRED | ES_AWAYMODE_REQUIRED
+        ctypes.windll.kernel32.SetThreadExecutionState(flags)
+        if log:
+            log("keep-awake enabled with SetThreadExecutionState")
+        return True
+    except Exception as exc:
+        if log:
+            log(f"keep-awake enable failed: {exc}")
+        return False
+
+
+def clear_keep_awake(log=None) -> None:
+    if os.name != "nt":
+        return
+    try:
+        ctypes.windll.kernel32.SetThreadExecutionState(ES_CONTINUOUS)
+        if log:
+            log("keep-awake cleared")
+    except Exception as exc:
+        if log:
+            log(f"keep-awake clear failed: {exc}")
+
+
+def start_keep_awake_thread(enabled: bool, log=None) -> threading.Event:
+    stop_event = threading.Event()
+    if not enabled:
+        return stop_event
+
+    def loop() -> None:
+        while not stop_event.is_set():
+            request_keep_awake(log)
+            stop_event.wait(45)
+
+    thread = threading.Thread(target=loop, name="keep-awake", daemon=True)
+    thread.start()
+    return stop_event
 
 
 def ensure_dir(path: Path) -> None:
@@ -1190,6 +1237,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--incremental-db", type=Path, default=DEFAULT_INCREMENTAL_DB, help="Incremental index JSON path")
     parser.add_argument("--close-extra-tabs", action="store_true", help="Close extra Douyin tabs before/after each creator run")
     parser.add_argument("--max-tabs", type=int, default=3, help="Maximum Douyin tabs to keep when --close-extra-tabs is enabled")
+    parser.add_argument("--no-keep-awake", action="store_true", help="Do not request Windows to stay awake during collection")
     parser.add_argument("--out", type=Path, default=DEFAULT_OUTPUT_PATH, help="Output .xlsx path")
     parser.add_argument("--cdp-url", default=DEFAULT_CDP_URL, help="Chrome CDP URL, default http://127.0.0.1:9222")
     parser.add_argument("--evidence-dir", type=Path, default=DEFAULT_EVIDENCE_DIR, help="Log/screenshot directory")
@@ -1209,7 +1257,9 @@ def main() -> int:
 
     rows: list[dict[str, Any]] = []
     page: CdpPage | None = None
+    keep_awake_stop: threading.Event | None = None
     try:
+        keep_awake_stop = start_keep_awake_thread(not args.no_keep_awake, log)
         if args.har:
             log(f"parsing HAR: {args.har}")
             rows = rows_from_har(args.har, args.video_id, args.profile_url)
@@ -1327,6 +1377,9 @@ def main() -> int:
             write_excel(rows, args.out)
         return 1
     finally:
+        if keep_awake_stop:
+            keep_awake_stop.set()
+            clear_keep_awake(log)
         if page:
             page.close()
 

@@ -28,6 +28,17 @@ python douyin_creator_tracker.py --profile-list "profiles.txt" --all --humanize 
 
 ## 故障处理
 
+### 电脑进入睡眠或待机
+
+当前采集器默认会调用 Windows `SetThreadExecutionState` 防止系统睡眠和关闭显示。若正在运行的是旧版本任务，可单独启动保活进程：
+
+```powershell
+cd "C:\cutting video\douyin_creator_tracker"
+python keep_awake.py
+```
+
+看到 `evidence\keep_awake.log` 持续写入 `SetThreadExecutionState active` 即表示保活生效。
+
 ### CDP 连接失败
 
 现象：

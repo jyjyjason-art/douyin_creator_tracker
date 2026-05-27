@@ -23,6 +23,7 @@
 - 慢速采集默认启用 `--humanize`，随机停顿 `3~9` 秒。
 - 每条视频采集后立即 checkpoint 写 Excel。
 - 多达人批量使用 `--profile-list`；增量跳过使用 `--incremental`。
+- 长任务默认启用 Windows keep-awake；不要关闭这个能力，除非用户明确要求。
 - 失败视频保留一行，不中断整个任务。
 
 ## 修改规则
