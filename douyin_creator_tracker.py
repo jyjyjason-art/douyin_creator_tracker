@@ -1119,7 +1119,7 @@ def load_profile_urls(profile_url: str, profile_list: Path | None) -> list[str]:
     urls: list[str] = []
     if profile_list:
         for line in profile_list.read_text(encoding="utf-8", errors="replace").splitlines():
-            value = line.strip()
+            value = line.strip().lstrip("\ufeff")
             if not value or value.startswith("#"):
                 continue
             urls.append(value)
@@ -1175,7 +1175,7 @@ def mark_rows_in_index(index: dict[str, Any], profile_url: str, rows: list[dict[
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Track Douyin creator video commerce data through Chrome CDP.")
-    parser.add_argument("--profile-url", default=DEFAULT_PROFILE_URL, help="Douyin creator profile URL or short URL")
+    parser.add_argument("--profile-url", default="", help=f"Douyin creator profile URL or short URL, default {DEFAULT_PROFILE_URL} when --profile-list is not provided")
     parser.add_argument("--profile-list", type=Path, help="Text file with one creator profile URL per line")
     parser.add_argument("--video-id", default="", help="Optional target video id, used by --har parsing")
     parser.add_argument("--target-video-id", default="", help="Only collect this video id from the creator profile")
@@ -1218,6 +1218,8 @@ def main() -> int:
             log(f"done rows={len(rows)}")
             return 0
 
+        if not args.profile_url and not args.profile_list:
+            args.profile_url = DEFAULT_PROFILE_URL
         profile_urls = load_profile_urls(args.profile_url, args.profile_list)
         if not profile_urls:
             raise CdpError("No creator profile URL provided")

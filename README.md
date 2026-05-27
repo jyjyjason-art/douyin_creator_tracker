@@ -82,6 +82,8 @@ python douyin_creator_tracker.py --profile-list "profiles.txt" --all --humanize 
 
 `profiles.txt` 每行一个达人链接；空行和 `#` 开头的注释会跳过。增量索引默认写入 `outputs/collected_index.json`，已采集过的 `video_id` 会跳过。
 
+使用 `--profile-list` 时只采集列表里的达人，不会自动混入默认测试达人。
+
 清理多余 Douyin 标签：
 
 ```powershell
