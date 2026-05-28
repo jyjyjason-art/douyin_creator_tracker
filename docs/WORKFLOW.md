@@ -1,74 +1,99 @@
 # Workflow
 
-## 1. 环境准备
+## 1. Prepare Chrome
 
-退出所有 Chrome 后启动同一 profile 的 CDP Chrome：
+Close all Chrome windows, then start Chrome with CDP and the same user profile:
 
 ```powershell
 & "$env:ProgramFiles\Google\Chrome\Application\chrome.exe" --remote-debugging-port=9222 --user-data-dir="$env:LOCALAPPDATA\Google\Chrome\User Data" --profile-directory="Default"
 ```
 
-检查 CDP：
+Check CDP:
 
 ```powershell
 Invoke-RestMethod http://127.0.0.1:9222/json/version
 ```
 
-## 2. 小样本验证
+Enter the project:
 
 ```powershell
 cd "C:\cutting video\douyin_creator_tracker"
-python douyin_creator_tracker.py --profile-url "https://v.douyin.com/yrNAdFgturw/" --limit 3 --humanize --out "outputs\smoke3.xlsx" --evidence-dir "evidence\smoke3"
 ```
 
-读回 Excel，确认有 `video_id`、`product_name`、`product_id`。
-
-## 3. 全量可发现作品采集
+## 2. Smoke Test
 
 ```powershell
-python douyin_creator_tracker.py --profile-url "https://v.douyin.com/yrNAdFgturw/" --all --humanize --out "outputs\douyin_creator_tracker_current_creator_all_discoverable.xlsx" --evidence-dir "evidence\douyin_creator_tracker_current_creator_all_discoverable" --retries 1
+python douyin_creator_tracker.py --profile-url "https://v.douyin.com/yrNAdFgturw/" --limit 3 --humanize --out "outputs\smoke3.xlsx" --evidence-dir "evidence\smoke3" --retries 2
 ```
 
-## 4. 数据清洗规则
+Read the Excel file and verify `video_id`, `video_title`, and `collect_status`. For commerce videos, check `product_name` and real `product_id`.
 
-- `product_id` 优先取响应里的真实 `product_id`。
-- `promotion_id` 可作为商品卡线索，但不能覆盖真实 `product_id`。
-- 点击商品卡补采时，商品名必须和视频标题中的孕妇裤、裙、孕妇装等关键词相关。
-- 推荐商品污染要删除或标记为 `ok_no_product_after_cleaning`。
-
-## 5. 结果验收
-
-用 `openpyxl` 读回输出 Excel 并统计：
-
-- 总行数
-- 去重视频数
-- 状态分布
-- 缺商品 ID 数
-- 重复视频行
-
-## 6. 多达人流程
-
-当前建议串行运行多个达人，不并发：
-
-1. 复用同一个 CDP Chrome。
-2. 每个达人一个输出 Excel。
-3. 每个达人一个 evidence 子目录。
-4. 一个达人结束并验收后，再跑下一个达人。
-
-批量入口：
+## 3. Single Creator Full Collection
 
 ```powershell
-python douyin_creator_tracker.py --profile-list "profiles.txt" --all --humanize --incremental --close-extra-tabs --out "outputs\douyin_batch.xlsx" --evidence-dir "evidence\douyin_batch" --retries 1
+python douyin_creator_tracker.py --profile-url "https://v.douyin.com/yrNAdFgturw/" --all --humanize --incremental --incremental-db "outputs\collected_index.json" --out "outputs\douyin_creator.xlsx" --evidence-dir "evidence\douyin_creator" --retries 2 --close-extra-tabs --max-tabs 3
 ```
 
-## 7. 增量采集
+Flow:
 
-启用 `--incremental` 后，脚本会读取 `outputs/collected_index.json`，跳过已采集过的 `video_id`。每条视频采集完成后立即更新索引。
+1. Connect to Chrome CDP.
+2. Open the short or long creator URL.
+3. Resolve the final creator profile URL.
+4. Scan creator works from DOM and `/aweme/v1/web/aweme/post/`.
+5. Skip indexed `video_id`s when `--incremental` is enabled.
+6. Open each video page.
+7. Extract title, publish time, product name, and real `product_id`.
+8. Write Excel and incremental index after each video.
 
-状态区分：
+## 4. Multiple Creator Batch
 
-- `ok`：采到有效商品或正常完成。
-- `ok_no_product_detected`：视频文本不像带货内容，未发现商品。
-- `partial_product_not_exposed`：视频文本像带货内容，但网络和商品卡都未暴露有效商品 ID。
-- `partial_login_required_for_product`：疑似登录态或商品卡渲染问题。
-- `failed`：单条失败，任务继续。
+Create `profiles.txt`:
+
+```text
+https://www.douyin.com/user/xxx
+https://www.douyin.com/user/yyy
+```
+
+Run:
+
+```powershell
+python douyin_creator_tracker.py --profile-list "profiles.txt" --all --humanize --incremental --incremental-db "outputs\collected_index.json" --out "outputs\douyin_batch.xlsx" --evidence-dir "evidence\douyin_batch" --retries 2 --close-extra-tabs --max-tabs 3
+```
+
+The current strategy is serial collection, not parallel creator collection.
+
+## 5. Resume
+
+Resume depends on:
+
+- Excel checkpoint after every video.
+- Incremental index update after every video.
+
+If network, CDP, or system issues stop the Python process, rerun the same command with `--incremental`. The tracker scans the profile again and skips already collected `video_id`s.
+
+This is not a full watchdog mode. A separate runner is still needed for automatic restart after process exit.
+
+## 6. Cleaning Rules
+
+- Prefer real `product_id` from commerce responses.
+- Use `promotion_id` only as a clue, not as final `product_id`.
+- Product names collected from product cards must be relevant to the video title or text.
+- Recommendation pollution should be removed or marked as not exposing a valid product.
+
+## 7. Acceptance
+
+Use `openpyxl` to read the output and report:
+
+- total rows
+- unique videos
+- `collect_status` distribution
+- rows missing `product_id`
+- duplicate video rows
+- output path
+
+Code validation:
+
+```powershell
+python test_parser.py
+python -m py_compile douyin_creator_tracker.py test_parser.py keep_awake.py
+```

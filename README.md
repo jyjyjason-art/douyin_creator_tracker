@@ -1,20 +1,39 @@
 # Douyin Creator Tracker
 
-抖音达人视频发布与带货商品追踪工具。当前版本使用本机 Google Chrome Stable + CDP 复用已登录的 Chrome profile，按达人主页采集视频与商品信息并输出 Excel。
+Local Douyin creator video and commerce tracker.
 
-## 当前状态
+The tracker uses Google Chrome Stable through CDP and reuses the user's logged-in Chrome profile. It does not create a browser with Playwright.
 
-已在达人 `是小鹿吖` 上完成端到端验证：
+## Paths
 
-- 达人链接：`https://v.douyin.com/yrNAdFgturw/`
-- PC 主页标记作品数：`91`
-- 已采集可发现视频：`91`
-- 有效带货商品行：`84`
-- 清洗后判定无有效商品：`7`
-- 重复视频行：`0`
-- 最终本地结果：`outputs/douyin_creator_tracker_current_creator_all_discoverable.xlsx`
+- Project root: `C:\cutting video\douyin_creator_tracker`
+- Main script: `douyin_creator_tracker.py`
+- Keep-awake helper: `keep_awake.py`
+- Results: `outputs\`
+- Logs, screenshots, evidence: `evidence\`
+- Incremental index: `outputs\collected_index.json`
 
-## 采集字段
+`outputs\` and `evidence\` are local runtime artifacts and are intentionally ignored by Git.
+
+## Current Capabilities
+
+- Connect to an existing Chrome CDP endpoint.
+- Reuse the user's existing Chrome profile and login state.
+- Accept Douyin short links and long creator profile URLs.
+- Collect one creator, multiple creators, or one target video.
+- Collect all currently discoverable works with `--all`.
+- Parse HAR files offline with `--har`.
+- Use humanized delays and idle scrolls with `--humanize`.
+- Resume by `video_id` with `--incremental`.
+- Write Excel checkpoints after every video.
+- Update `outputs\collected_index.json` after every video.
+- Limit extra Douyin tabs with `--close-extra-tabs --max-tabs 3`.
+- Keep Windows awake during long runs by default.
+- Recover from some CDP stale target and reconnect failures.
+
+Important limitation: checkpoint resume works, but there is no external watchdog runner yet. If the Python process exits completely, restart the same incremental command to continue.
+
+## Output Fields
 
 - `creator_name`
 - `creator_profile_url`
@@ -31,96 +50,101 @@
 - `collect_status`
 - `error_message`
 
-## 核心原则
+## Status Values
 
-- 不用 Playwright 创建浏览器。
-- 只连接已经启动的 Google Chrome CDP。
-- 复用同一个已登录 Chrome profile。
-- 默认复用一个已有 Douyin 标签页顺序采集，不为每个视频或达人新开标签。
-- 慢速采集时使用 `3~9` 秒随机停顿，并在达人主页做一屏左右的无意义滚动。
-- 每条视频采集后 checkpoint 写入 Excel，避免中断后结果丢失。
-- 默认会请求 Windows 在采集期间保持唤醒，避免长任务进入睡眠；如需关闭可加 `--no-keep-awake`。
+- `ok`: collection finished normally.
+- `ok_no_product_detected`: no product was detected.
+- `partial_product_not_exposed`: the video looks commercial, but no valid product ID was exposed.
+- `partial_login_required_for_product`: login or permission state likely blocked product detail.
+- `failed`: one video failed; the batch should continue.
 
-## 启动 Chrome CDP
+## Start Chrome CDP
 
-先退出所有 Chrome，再用同一个用户数据目录和 profile 启动：
+Close all Chrome windows first, then start Chrome with the same user data directory:
 
 ```powershell
 & "$env:ProgramFiles\Google\Chrome\Application\chrome.exe" --remote-debugging-port=9222 --user-data-dir="$env:LOCALAPPDATA\Google\Chrome\User Data" --profile-directory="Default"
 ```
 
-如果 Chrome 在 x86 目录：
+If Chrome is installed under Program Files (x86):
 
 ```powershell
 & "${env:ProgramFiles(x86)}\Google\Chrome\Application\chrome.exe" --remote-debugging-port=9222 --user-data-dir="$env:LOCALAPPDATA\Google\Chrome\User Data" --profile-directory="Default"
 ```
 
-## 常用命令
+Check CDP:
 
-进入项目目录：
+```powershell
+Invoke-RestMethod http://127.0.0.1:9222/json/version
+```
+
+## Common Commands
+
+Enter the project:
 
 ```powershell
 cd "C:\cutting video\douyin_creator_tracker"
 ```
 
-采集指定达人当前可发现全部作品：
+Collect one creator:
 
 ```powershell
-python douyin_creator_tracker.py --profile-url "https://v.douyin.com/yrNAdFgturw/" --all --humanize --out "outputs\douyin_creator_tracker_current_creator_all_discoverable.xlsx" --evidence-dir "evidence\douyin_creator_tracker_current_creator_all_discoverable" --retries 1
+python douyin_creator_tracker.py --profile-url "https://v.douyin.com/yrNAdFgturw/" --all --humanize --incremental --incremental-db "outputs\collected_index.json" --out "outputs\douyin_creator.xlsx" --evidence-dir "evidence\douyin_creator" --retries 2 --close-extra-tabs --max-tabs 3
 ```
 
-采集前 20 条：
+Collect multiple creators:
 
 ```powershell
-python douyin_creator_tracker.py --profile-url "https://v.douyin.com/yrNAdFgturw/" --limit 20 --humanize --out "outputs\douyin_creator_tracker_limit20.xlsx" --evidence-dir "evidence\douyin_creator_tracker_limit20"
+python douyin_creator_tracker.py --profile-list "profiles.txt" --all --humanize --incremental --incremental-db "outputs\collected_index.json" --out "outputs\douyin_batch.xlsx" --evidence-dir "evidence\douyin_batch" --retries 2 --close-extra-tabs --max-tabs 3
 ```
 
-多达人批量增量采集：
+`profiles.txt` should contain one creator URL per line. Blank lines and lines starting with `#` are skipped.
+
+Collect one target video:
 
 ```powershell
-python douyin_creator_tracker.py --profile-list "profiles.txt" --all --humanize --incremental --close-extra-tabs --out "outputs\douyin_batch.xlsx" --evidence-dir "evidence\douyin_batch" --retries 1
+python douyin_creator_tracker.py --profile-url "https://v.douyin.com/yrNAdFgturw/" --target-video-id 7644168958324866981 --out "outputs\douyin_target.xlsx" --evidence-dir "evidence\douyin_target" --retries 2
 ```
 
-`profiles.txt` 每行一个达人链接；空行和 `#` 开头的注释会跳过。增量索引默认写入 `outputs/collected_index.json`，已采集过的 `video_id` 会跳过。
-
-使用 `--profile-list` 时只采集列表里的达人，不会自动混入默认测试达人。
-
-清理多余 Douyin 标签：
-
-```powershell
-python douyin_creator_tracker.py --profile-url "https://v.douyin.com/yrNAdFgturw/" --limit 5 --close-extra-tabs --max-tabs 3
-```
-
-只采一个视频：
-
-```powershell
-python douyin_creator_tracker.py --profile-url "https://v.douyin.com/yrNAdFgturw/" --target-video-id 7644168958324866981 --out "outputs\douyin_target_7644168958324866981.xlsx" --evidence-dir "evidence\douyin_target_7644168958324866981"
-```
-
-解析 HAR：
+Parse HAR:
 
 ```powershell
 python douyin_creator_tracker.py --har "C:\path\to\douyin.har" --video-id 7644168958324866981 --out "outputs\douyin_har_product.xlsx"
 ```
 
-## 验证
+## Validation
 
 ```powershell
 python test_parser.py
-python -m py_compile douyin_creator_tracker.py test_parser.py
+python -m py_compile douyin_creator_tracker.py test_parser.py keep_awake.py
 ```
 
-## 关键发现
+## Verified Results
 
-真实商品 ID 不在普通视频页 DOM 中。已验证的优先数据源：
+First large creator run:
 
-- `aweme/v1/web/aweme/detail`：视频对象中的 `anchorInfo.extra` / `anchor_info.extra`。
-- `ecom/product/detail/saas/pc`：商品详情响应。
-- 达人作品列表来自 `/aweme/v1/web/aweme/post/` 的顶层 `aweme_list`，分页字段为 `max_cursor` / `has_more`。
+- Creator profile contains `MS4wLjABAAAAiGmBlS9r1qi0r8PeGew2kv2vVPUUgfk3u-GQrlOAU25w5kVLKihX3DLH3-nU0G36`
+- Page work count: `794`
+- Incremental index unique videos: `794`
+- Results are split across checkpoint Excel files under `outputs\`
 
-页面里 `a11y-configs` 的 `product_id:100005` 是无障碍 SDK 配置，不是商品 ID。
+Earlier smoke creator:
 
-## 文档
+- Source short link: `https://v.douyin.com/yrNAdFgturw/`
+- Page work count: `91`
+- Collected unique videos: `91`
+
+## Product ID Findings
+
+Real commerce product IDs are not reliably present in normal DOM text. Preferred sources:
+
+- `/aweme/v1/web/aweme/detail`, especially `anchorInfo.extra` and `anchor_info.extra`
+- `/ecom/product/detail/saas/pc`
+- `/aweme/v1/web/aweme/post/`, top-level `aweme_list`
+
+The page config value `a11y-configs product_id:100005` is accessibility SDK config, not a commerce product ID.
+
+## Docs
 
 - [Agent](agents/douyin_creator_tracker_agent.md)
 - [Workflow](docs/WORKFLOW.md)

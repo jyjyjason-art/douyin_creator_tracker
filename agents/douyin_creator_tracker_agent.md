@@ -1,18 +1,20 @@
 # Douyin Creator Tracker Agent
 
-## 角色
+## Role
 
-你是本项目的采集维护 Agent，负责维护和运行抖音达人视频发布与带货商品追踪流程。
+Maintain and run the local Douyin creator video and commerce tracking workflow.
 
-## 输入
+## Inputs
 
-- 达人主页短链或长链，例如 `https://v.douyin.com/yrNAdFgturw/`
-- 采集数量：指定条数、指定视频、或当前可发现全部作品
-- 输出 Excel 路径
+- Creator short link or long profile URL.
+- One target video ID.
+- A profile list file.
+- Collection mode: limit, target video, or all discoverable works.
+- Output Excel path and evidence directory.
 
-## 输出
+## Output Contract
 
-Excel 字段必须包含：
+Excel fields:
 
 - `creator_name`
 - `creator_profile_url`
@@ -29,33 +31,41 @@ Excel 字段必须包含：
 - `collect_status`
 - `error_message`
 
-## 操作边界
+## Boundaries
 
-- 不创建 Playwright 浏览器。
-- 不切换或新建 Chrome profile。
-- 不批量打开新标签。
-- 不点击支付、下单、关注、私信等会改变账号状态的按钮。
-- 不提交 `outputs/` 和 `evidence/` 到 GitHub。
+- Do not create a Playwright browser.
+- Do not switch or create Chrome profiles.
+- Do not open one tab per video.
+- Do not click payment, order, follow, or private-message actions.
+- Do not commit `outputs\` or `evidence\`.
 
-## 标准流程
+## Standard Flow
 
-1. 确认 Chrome CDP 可访问：`http://127.0.0.1:9222/json/version`。
-2. 用采集器打开或复用达人主页标签。
-3. 解析短链跳转后的最终达人主页 URL。
-4. 从 DOM 和 `/aweme/v1/web/aweme/post/` 顶层 `aweme_list` 收集视频。
-5. 逐条进入视频页。
-6. 优先从网络响应提取标题、发布时间、商品名、真实 `product_id`。
-7. 缺商品信息时点击商品卡补采，并做标题相关性过滤。
-8. 每条视频结束后 checkpoint 写入 Excel。
-9. 任务结束后读回 Excel 做统计。
+1. Verify CDP at `http://127.0.0.1:9222/json/version`.
+2. Open or reuse the creator profile tab.
+3. Resolve final creator profile URL.
+4. Collect videos from DOM and `/aweme/v1/web/aweme/post/`.
+5. Skip existing `video_id`s when incremental mode is enabled.
+6. Open each video page.
+7. Extract title, publish time, product name, and real `product_id` from network responses first.
+8. Click product card only as fallback, then filter by title relevance.
+9. Write Excel and incremental index after every video.
+10. Read the Excel and report acceptance statistics.
 
-## 验收口径
+## Recovery Strategy
 
-任务不能只看命令退出码。必须读回 Excel 并汇报：
+- Keep a row for failed videos.
+- Retry CDP disconnects when possible.
+- Rerun the same `--incremental` command after process exit.
+- Do not delete old Excel files; they are checkpoints and evidence.
 
-- 行数
-- 视频数
-- `collect_status` 分布
-- 缺 `product_id` 数
-- 重复视频行数
-- 输出文件路径
+## Acceptance
+
+Do not rely only on exit code. Read Excel and report:
+
+- rows
+- unique videos
+- `collect_status` distribution
+- missing `product_id` rows
+- duplicate video rows
+- output path

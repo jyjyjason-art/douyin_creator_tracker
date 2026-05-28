@@ -1,103 +1,123 @@
 # Runbook
 
-## 常用命令
+## Commands
 
-进入项目：
+Enter project:
 
 ```powershell
 cd "C:\cutting video\douyin_creator_tracker"
 ```
 
-启动 Chrome CDP：
+Start Chrome CDP:
 
 ```powershell
 & "$env:ProgramFiles\Google\Chrome\Application\chrome.exe" --remote-debugging-port=9222 --user-data-dir="$env:LOCALAPPDATA\Google\Chrome\User Data" --profile-directory="Default"
 ```
 
-采集当前达人全部可发现作品：
+Single creator:
 
 ```powershell
-python douyin_creator_tracker.py --profile-url "https://v.douyin.com/yrNAdFgturw/" --all --humanize --out "outputs\douyin_creator_tracker_current_creator_all_discoverable.xlsx" --evidence-dir "evidence\douyin_creator_tracker_current_creator_all_discoverable" --retries 1
+python douyin_creator_tracker.py --profile-url "https://v.douyin.com/yrNAdFgturw/" --all --humanize --incremental --incremental-db "outputs\collected_index.json" --out "outputs\douyin_creator.xlsx" --evidence-dir "evidence\douyin_creator" --retries 2 --close-extra-tabs --max-tabs 3
 ```
 
-多达人增量批量采集：
+Multiple creators:
 
 ```powershell
-python douyin_creator_tracker.py --profile-list "profiles.txt" --all --humanize --incremental --close-extra-tabs --out "outputs\douyin_batch.xlsx" --evidence-dir "evidence\douyin_batch" --retries 1
+python douyin_creator_tracker.py --profile-list "profiles.txt" --all --humanize --incremental --incremental-db "outputs\collected_index.json" --out "outputs\douyin_batch.xlsx" --evidence-dir "evidence\douyin_batch" --retries 2 --close-extra-tabs --max-tabs 3
 ```
 
-## 故障处理
+## Check Runtime Status
 
-### 电脑进入睡眠或待机
-
-当前采集器默认会调用 Windows `SetThreadExecutionState` 防止系统睡眠和关闭显示。若正在运行的是旧版本任务，可单独启动保活进程：
+Python processes:
 
 ```powershell
-cd "C:\cutting video\douyin_creator_tracker"
+Get-CimInstance Win32_Process -Filter "name='python.exe'" | Where-Object { $_.CommandLine -like '*douyin_creator_tracker.py*' -or $_.CommandLine -like '*keep_awake.py*' } | Select-Object ProcessId,CommandLine | Format-List
+```
+
+Run log:
+
+```powershell
+Get-Content "evidence\douyin_batch\run.log" -Tail 80
+```
+
+stderr:
+
+```powershell
+Get-Content "evidence\douyin_batch.stderr.log" -Tail 80
+```
+
+## Troubleshooting
+
+### Sleep or Standby
+
+The tracker calls Windows `SetThreadExecutionState` by default. For older already-running tasks, start:
+
+```powershell
 python keep_awake.py
 ```
 
-看到 `evidence\keep_awake.log` 持续写入 `SetThreadExecutionState active` 即表示保活生效。
+`evidence\keep_awake.log` should keep receiving `SetThreadExecutionState active`.
 
-### CDP 连接失败
+### CDP Is Not Reachable
 
-现象：
+Symptoms:
 
 - `Cannot connect to Chrome CDP`
-- `http://127.0.0.1:9222/json/version` 不通
+- `http://127.0.0.1:9222/json/version` fails
 
-处理：
+Fix:
 
-1. 退出所有 Chrome。
-2. 重新用 `--remote-debugging-port=9222` 启动。
-3. 再运行采集器。
+1. Close all Chrome windows.
+2. Restart Chrome with `--remote-debugging-port=9222`.
+3. Rerun the collection command with `--incremental`.
 
-### CDP 502 或标签页混乱
+### CDP Disconnect or Stale Target
 
-处理：
+Symptoms:
 
-1. 保存当前 Excel。
-2. 退出所有 Chrome。
-3. 重新启动 CDP Chrome。
-4. 重新运行，脚本会 checkpoint，不会影响已有最终文件。
+- `CDP receive loop stopped unexpectedly`
+- `CDP timeout: Page.enable`
+- `CDP timeout: Page.navigate`
+- `CDP timeout: Page.captureScreenshot`
 
-### 出现很多标签
+Current behavior:
 
-历史原因是旧版本每次连接 CDP 都新建标签。当前版本已修复为优先复用现有 Douyin 标签。旧标签可手动关闭或重启 Chrome 清理。
+- Close old CDP page.
+- Skip stale targets.
+- Create a fresh target.
+- Retry the current video.
 
-运行时可加：
+If the process exits anyway, rerun the same incremental command.
+
+### Too Many Tabs
+
+Use:
 
 ```powershell
 --close-extra-tabs --max-tabs 3
 ```
 
-### 商品 ID 为空
+Old tabs can also be closed manually or by restarting Chrome.
 
-可能原因：
+### Empty Product ID
 
-- 该视频无带货商品。
-- 商品卡被隐藏。
-- 点击补采抓到的是推荐商品，被相关性清洗删除。
-- 抖音接口字段变更。
+Possible causes:
 
-处理：
+- The video has no product.
+- The product card was not exposed.
+- Douyin fields changed.
+- A recommendation product was filtered out as unrelated.
 
-1. 查看 `collect_status`。
-2. 查看 `error_message`。
-3. 对单条视频运行 `--target-video-id` 复核。
+Actions:
 
-### 推荐商品污染
+1. Check `collect_status`.
+2. Check `error_message`.
+3. Re-run the video with `--target-video-id`.
+4. Save HAR and parse it with `--har` when needed.
 
-现象：视频讲孕妇裤，但商品名出现袜子、凉席、猫砂等。
-
-处理：
-
-- 保持标题相关性过滤开启。
-- 若仍污染，增强 `product_matches_video_text` 的关键词规则。
-
-## 验证命令
+## Validation
 
 ```powershell
 python test_parser.py
-python -m py_compile douyin_creator_tracker.py test_parser.py
+python -m py_compile douyin_creator_tracker.py test_parser.py keep_awake.py
 ```

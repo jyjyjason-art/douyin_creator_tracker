@@ -1,41 +1,67 @@
 # Current Status
 
-更新时间：2026-05-28
+Updated: 2026-05-28
 
-## 已跑通达人
+## Implemented and Verified
 
-- 达人名：是小鹿吖
-- 输入链接：`https://v.douyin.com/yrNAdFgturw/`
-- 最终主页：`https://www.douyin.com/user/MS4wLjABAAAAyFZVSmhGi_0cmIO1LoMtITYrZEKQPMOOyBEac9JEyMo`
-- 页面标记作品数：`91`
+- Google Chrome Stable + CDP control.
+- Reuse of the user's logged-in Chrome profile.
+- Short-link resolution.
+- Creator profile video scanning.
+- Single-creator and multi-creator inputs.
+- Incremental collection and checkpoint resume.
+- Excel checkpoint after every video.
+- Windows keep-awake.
+- CDP stale target skip and reconnect retry.
+- Extra tab control.
 
-## 最终本地结果
+## Verified Runs
 
-```text
-C:\cutting video\douyin_creator_tracker\outputs\douyin_creator_tracker_current_creator_all_discoverable.xlsx
-```
+### Early smoke creator
 
-统计：
+- Source short link: `https://v.douyin.com/yrNAdFgturw/`
+- Page work count: `91`
+- Collected unique videos: `91`
+- Local output: `outputs\douyin_creator_tracker_current_creator_all_discoverable.xlsx`
 
-- rows：`91`
-- videos：`91`
-- status：
-  - `ok`: `84`
-  - `ok_no_product_after_cleaning`: `7`
-- missing_product_id：`7`
-- duplicate_video_rows：`0`
+### Creator profile ending in `...G36`
 
-## 已验证突破口
+- Profile URL contains: `MS4wLjABAAAAiGmBlS9r1qi0r8PeGew2kv2vVPUUgfk3u-GQrlOAU25w5kVLKihX3DLH3-nU0G36`
+- Page work count: `794`
+- Incremental index unique videos: `794`
+- Results are split across:
+  - `outputs\douyin_two_new_creators_20260528_030419.xlsx`
+  - `outputs\douyin_two_new_creators_resume_20260528_121054.xlsx`
+  - `outputs\douyin_two_new_creators_resume_20260528_133945.xlsx`
 
-- 视频商品信息可从 `aweme/v1/web/aweme/detail` 的 `anchorInfo.extra` 获取。
-- 真实商品 ID 是响应中的 `product_id`。
-- `promotion_id` 不是最终要写入 `product_id` 字段的值。
-- 作品列表来自 `/aweme/v1/web/aweme/post/` 顶层 `aweme_list`。
-- 该达人 PC 作品列表分页最终返回 `has_more=0`。
+## Latest Batch State
 
-## 仍可增强
+Two-creator batch file:
 
-- 多达人批量队列。
-- 增量采集数据库，避免重复采历史视频。
-- 更细的商品污染判定。
-- 采集结果自动汇总报告。
+- Profile list: `evidence\profile_list_two_creators_20260528.txt`
+- Output: `outputs\douyin_two_new_creators_resume_20260528_133945.xlsx`
+- Evidence: `evidence\douyin_two_new_creators_resume_20260528_133945`
+
+Last observed local state while updating docs:
+
+- No `douyin_creator_tracker.py` process was running.
+- Output had `77` rows.
+- First large creator was complete in the incremental index.
+- Second creator had begun and had at least `39` rows in the latest output.
+
+This is runtime state only. Runtime outputs are not committed to GitHub.
+
+## Product ID Findings
+
+- Product data can be extracted from `/aweme/v1/web/aweme/detail` and `anchorInfo.extra`.
+- Real product ID is response field `product_id`.
+- `promotion_id` is not the final value for `product_id`.
+- Profile works come from `/aweme/v1/web/aweme/post/` top-level `aweme_list`.
+- `a11y-configs product_id:100005` is not a commerce product ID.
+
+## Next Useful Improvements
+
+- External runner/watchdog to restart the Python process automatically.
+- Utility to merge checkpoint Excel files into one creator-level output.
+- Better separation of "no product" vs "product API did not expose data".
+- More regression samples for product recommendation pollution.
