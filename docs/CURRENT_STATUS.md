@@ -42,12 +42,17 @@ Two-creator batch file:
 - Output: `outputs\douyin_two_new_creators_resume_20260528_133945.xlsx`
 - Evidence: `evidence\douyin_two_new_creators_resume_20260528_133945`
 
-Last observed local state while updating docs:
+Second creator only follow-up:
 
-- No `douyin_creator_tracker.py` process was running.
-- Output had `77` rows.
-- First large creator was complete in the incremental index.
-- Second creator had begun and had at least `39` rows in the latest output.
+- Profile list: `evidence\profile_list_second_creator_20260528.txt`
+- Output: `outputs\douyin_second_creator_resume_20260528_165218.xlsx`
+- Evidence: `evidence\douyin_second_creator_resume_20260528_165218`
+- Collection was manually stopped at the user's request.
+- Saved rows: `209`
+- Unique videos in this output: `208`
+- Status counts: `ok=125`, `partial_product_not_exposed=83`, `ok_no_product_detected=1`
+- Missing product ID rows: `84`
+- Incremental index count for the second creator: `294`
 
 This is runtime state only. Runtime outputs are not committed to GitHub.
 
