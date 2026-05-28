@@ -536,7 +536,30 @@ def connect_or_create_tab(cdp_url: str, initial_url: str, log_path: Path) -> Cdp
     if pages:
         douyin_pages = [t for t in pages if "douyin.com" in (t.get("url") or "")]
         user_pages = [t for t in douyin_pages if "/user/" in (t.get("url") or "")]
-        target = (user_pages or douyin_pages or pages)[0]
+        candidates = user_pages or douyin_pages or pages
+        last_error: Exception | None = None
+        for candidate in candidates[:5]:
+            ws_url = candidate.get("webSocketDebuggerUrl")
+            if not ws_url:
+                continue
+            page = CdpPage(ws_url, log_path)
+            try:
+                page.setup()
+                return page
+            except Exception as exc:
+                last_error = exc
+                page.close()
+                try:
+                    log_path.open("a", encoding="utf-8").write(
+                        f"[{now_text()}] skipped stale CDP target {candidate.get('id')}: {exc}\n"
+                    )
+                except Exception:
+                    pass
+        if last_error:
+            try:
+                log_path.open("a", encoding="utf-8").write(f"[{now_text()}] creating fresh CDP target after stale targets: {last_error}\n")
+            except Exception:
+                pass
     if target is None:
         encoded = parse.quote(initial_url, safe="")
         target = http_json(f"{cdp_url}/json/new?{encoded}", method="PUT")
