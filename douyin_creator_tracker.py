@@ -1374,7 +1374,10 @@ def main() -> int:
                     except Exception:
                         pass
                     page = connect_or_create_tab(args.cdp_url, final_profile_url, log_path)
-                    page.navigate(final_profile_url, wait_seconds=2)
+                    try:
+                        page.navigate(final_profile_url, wait_seconds=2)
+                    except Exception as exc:
+                        log(f"profile reload after CDP reconnect skipped: {exc}")
                 rows.extend(video_rows)
                 if args.incremental:
                     mark_rows_in_index(incremental_index, final_profile_url, video_rows)
