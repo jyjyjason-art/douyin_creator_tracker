@@ -56,6 +56,17 @@ Second creator only follow-up:
 
 This is runtime state only. Runtime outputs are not committed to GitHub.
 
+## Completed Creator: `MS4wLjABAAAA-172...`
+
+- Profile URL contains: `MS4wLjABAAAA-172HQ5SFcyboQgcS_BPlb-5QlvEEgVZQbEuWRp3FUBVFIO3GTq4a3iyB7qi17-x`
+- Creator name in output: `Yiyi (Chinese name in Excel)`
+- Output: `outputs\douyin_new_creator_20260528_191029.xlsx`
+- Evidence: `evidence\douyin_new_creator_20260528_191029`
+- Rows: `260`
+- Unique videos: `185`
+- Status counts: `ok=255`, `partial_product_not_exposed=3`, `ok_no_product_detected=2`
+- Missing product ID rows: `5`
+
 ## Product ID Findings
 
 - Product data can be extracted from `/aweme/v1/web/aweme/detail` and `anchorInfo.extra`.
