@@ -67,6 +67,19 @@ This is runtime state only. Runtime outputs are not committed to GitHub.
 - Status counts: `ok=255`, `partial_product_not_exposed=3`, `ok_no_product_detected=2`
 - Missing product ID rows: `5`
 
+## Completed Creator: `MS4wLjABAAAAj_5...`
+
+- Profile URL contains: `MS4wLjABAAAAj_5VWyinmz-TmBcVPuibD377cwP7-kNqfDaTmPpu_GA0qsxNBloiRSHYM_wA1oeF`
+- Creator name in output: `Hanhan maternity outfits (Chinese name in Excel)`
+- Output: `outputs\douyin_creator_j5v_20260529_155939.xlsx`
+- Evidence: `evidence\douyin_creator_j5v_20260529_155939`
+- Rows: `1928`
+- Unique videos: `1925`
+- Duplicate video rows: `3`
+- Status counts: `ok=1669`, `partial_product_not_exposed=168`, `ok_no_product_detected=91`
+- Rows with product ID: `1669`
+- Missing product ID rows: `259`
+
 ## Product ID Findings
 
 - Product data can be extracted from `/aweme/v1/web/aweme/detail` and `anchorInfo.extra`.
