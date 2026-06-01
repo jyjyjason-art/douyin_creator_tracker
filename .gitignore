@@ -6,6 +6,8 @@ venv/
 
 outputs/
 evidence/
+!outputs/
+!outputs/collected_index.json
 
 *.log
 *.tmp

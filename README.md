@@ -15,6 +15,7 @@ The tracker uses Google Chrome Stable through CDP and reuses the user's logged-i
 - Incremental index: `outputs\collected_index.json`
 
 `outputs\` and `evidence\` are local runtime artifacts and are intentionally ignored by Git.
+Exception: `outputs\collected_index.json` is intentionally tracked to preserve incremental history across environments.
 
 ## Current Capabilities
 
@@ -53,6 +54,14 @@ Important limitation: checkpoint resume works, but there is no external watchdog
 - `collect_time`
 - `collect_status`
 - `error_message`
+
+## Incremental Index File
+
+- File: `outputs\collected_index.json`
+- Role:
+  - stores per-profile collected `video_id`s and per-video collection metadata
+  - drives resume and dedupe behavior for `--incremental`
+  - provides last-collect timestamps for smart incremental window estimation
 
 ## Status Values
 

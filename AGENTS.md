@@ -41,6 +41,11 @@ Maintain a reusable Douyin creator video and commerce tracking tool. Prioritize 
 - Read the current README, workflow, and runbook before changing code.
 - Keep changes narrow and tied to collection, parsing, export, or recovery.
 - Do not commit `outputs\`, `evidence\`, browser cache, or account data.
+- Exception: commit `outputs\collected_index.json` when sync of incremental history is required.
+- Purpose of `outputs\collected_index.json`:
+  - source of truth for collected `video_id`s by profile
+  - resume and dedupe baseline for `--incremental`
+  - input for smart incremental window day-gap estimation
 - After edits, run:
 
 ```powershell
