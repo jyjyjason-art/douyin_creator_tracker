@@ -17,13 +17,25 @@ Start Chrome CDP:
 Single creator:
 
 ```powershell
-python douyin_creator_tracker.py --profile-url "https://v.douyin.com/yrNAdFgturw/" --all --humanize --incremental --incremental-db "outputs\collected_index.json" --out "outputs\douyin_creator.xlsx" --evidence-dir "evidence\douyin_creator" --retries 2 --close-extra-tabs --max-tabs 3
+python douyin_creator_tracker.py --profile-url "https://v.douyin.com/yrNAdFgturw/" --all --humanize --incremental --incremental-db "outputs\collected_index.json" --incremental-daily-max 10 --incremental-lookback-days 1 --out "outputs\douyin_creator.xlsx" --evidence-dir "evidence\douyin_creator" --retries 2 --close-extra-tabs --max-tabs 3
 ```
 
 Multiple creators:
 
 ```powershell
-python douyin_creator_tracker.py --profile-list "profiles.txt" --all --humanize --incremental --incremental-db "outputs\collected_index.json" --out "outputs\douyin_batch.xlsx" --evidence-dir "evidence\douyin_batch" --retries 2 --close-extra-tabs --max-tabs 3
+python douyin_creator_tracker.py --profile-list "profiles.txt" --all --humanize --incremental --incremental-db "outputs\collected_index.json" --incremental-daily-max 10 --incremental-lookback-days 1 --out "outputs\douyin_batch.xlsx" --evidence-dir "evidence\douyin_batch" --retries 2 --close-extra-tabs --max-tabs 3
+```
+
+Force full scan for an existing creator:
+
+```powershell
+python douyin_creator_tracker.py --profile-url "https://www.douyin.com/user/xxx" --all --incremental --disable-smart-incremental-window --incremental-db "outputs\collected_index.json"
+```
+
+Web console:
+
+```powershell
+python web_app.py
 ```
 
 ## Check Runtime Status
@@ -98,6 +110,14 @@ Use:
 ```
 
 Old tabs can also be closed manually or by restarting Chrome.
+
+### Smart Incremental Window Behavior
+
+When `--all --incremental` is used, and smart window is enabled:
+
+- Existing creator: window size is `(days_since_last_collect + incremental_lookback_days) * incremental_daily_max`.
+- New creator in index: automatic full scan.
+- To disable smart window: add `--disable-smart-incremental-window`.
 
 ### Empty Product ID
 

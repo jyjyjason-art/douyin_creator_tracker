@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Douyin Creator Tracker Console</title>
+  <style>
+    body { font-family: "Segoe UI", Arial, sans-serif; margin: 20px; background: #f6f8fb; color: #222; }
+    h1 { margin: 0 0 12px; }
+    .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .card { background: #fff; border: 1px solid #dbe1ea; border-radius: 10px; padding: 14px; }
+    label { display: block; font-size: 13px; margin: 8px 0 4px; }
+    input[type="text"], input[type="number"] { width: 100%; padding: 8px; box-sizing: border-box; }
+    .row { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+    .checks { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; margin-top: 8px; }
+    button { padding: 8px 12px; margin-right: 8px; }
+    #logs { height: 320px; overflow: auto; background: #111; color: #9ef0a0; padding: 10px; font-family: Consolas, monospace; white-space: pre-wrap; }
+    table { width: 100%; border-collapse: collapse; }
+    th, td { text-align: left; padding: 6px; border-bottom: 1px solid #eee; font-size: 13px; }
+  </style>
+</head>
+<body>
+  <h1>Douyin Creator Tracker Console</h1>
+  <div class="grid">
+    <div class="card">
+      <form id="run-form">
+        <label>Profile URL</label>
+        <input type="text" name="profile_url" placeholder="https://www.douyin.com/user/..." />
+        <label>Profile List File</label>
+        <input type="text" name="profile_list" placeholder="outputs/profiles.txt" />
+        <label>Target Video ID</label>
+        <input type="text" name="target_video_id" placeholder="Optional" />
+        <div class="row">
+          <div>
+            <label>CDP URL</label>
+            <input type="text" name="cdp_url" value="http://127.0.0.1:9222" />
+          </div>
+          <div>
+            <label>Retries</label>
+            <input type="number" name="retries" value="2" />
+          </div>
+        </div>
+        <div class="row">
+          <div>
+            <label>Min Delay</label>
+            <input type="number" step="0.1" name="min_delay" value="3" />
+          </div>
+          <div>
+            <label>Max Delay</label>
+            <input type="number" step="0.1" name="max_delay" value="9" />
+          </div>
+        </div>
+        <div class="row">
+          <div>
+            <label>Limit</label>
+            <input type="number" name="limit" value="5" />
+          </div>
+          <div>
+            <label>Max Tabs</label>
+            <input type="number" name="max_tabs" value="3" />
+          </div>
+        </div>
+        <div class="row">
+          <div>
+            <label>Incremental Daily Max</label>
+            <input type="number" name="incremental_daily_max" value="10" />
+          </div>
+          <div>
+            <label>Incremental Lookback Days</label>
+            <input type="number" name="incremental_lookback_days" value="1" />
+          </div>
+        </div>
+        <label>Output Path</label>
+        <input type="text" name="out_path" placeholder="outputs/web_run_xxx.xlsx" />
+        <label>Evidence Dir</label>
+        <input type="text" name="evidence_dir" placeholder="evidence/web_run_xxx" />
+        <div class="checks">
+          <label><input type="checkbox" name="all_mode" checked /> All Mode</label>
+          <label><input type="checkbox" name="humanize" checked /> Humanize</label>
+          <label><input type="checkbox" name="incremental" checked /> Incremental</label>
+          <label><input type="checkbox" name="close_extra_tabs" checked /> Close Extra Tabs</label>
+          <label><input type="checkbox" name="no_keep_awake" /> No Keep Awake</label>
+          <label><input type="checkbox" name="disable_smart_incremental_window" /> Disable Smart Window</label>
+        </div>
+        <p>
+          <button type="submit">Start</button>
+          <button type="button" id="stop-btn">Stop</button>
+          <span id="state">Idle</span>
+        </p>
+      </form>
+    </div>
+    <div class="card">
+      <h3>Logs</h3>
+      <div id="logs"></div>
+    </div>
+  </div>
+  <div class="card" style="margin-top:16px;">
+    <h3>Recent Outputs</h3>
+    <table id="outputs-table">
+      <thead><tr><th>File</th><th>Size</th><th>Time</th><th>Download</th></tr></thead>
+      <tbody></tbody>
+    </table>
+  </div>
+  <script>
+    const form = document.getElementById("run-form");
+    const logsEl = document.getElementById("logs");
+    const stateEl = document.getElementById("state");
+    const stopBtn = document.getElementById("stop-btn");
+
+    async function refreshStatus() {
+      const data = await fetch("/api/status").then(r => r.json());
+      stateEl.textContent = data.running ? "Running" : (data.returncode === 0 ? "Done" : (data.returncode === null ? "Idle" : "Failed"));
+      logsEl.textContent = (data.logs || []).join("\n");
+      logsEl.scrollTop = logsEl.scrollHeight;
+    }
+
+    async function refreshOutputs() {
+      const data = await fetch("/api/outputs").then(r => r.json());
+      const tbody = document.querySelector("#outputs-table tbody");
+      tbody.innerHTML = "";
+      (data.files || []).forEach(f => {
+        const tr = document.createElement("tr");
+        tr.innerHTML = `<td>${f.name}</td><td>${f.size}</td><td>${f.mtime}</td><td><a href="/download/${encodeURIComponent(f.name)}">download</a></td>`;
+        tbody.appendChild(tr);
+      });
+    }
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const body = new URLSearchParams(new FormData(form));
+      const resp = await fetch("/api/run", { method: "POST", body });
+      if (!resp.ok) {
+        const err = await resp.json();
+        alert(err.error || "Start failed");
+      }
+      await refreshStatus();
+      await refreshOutputs();
+    });
+
+    stopBtn.addEventListener("click", async () => {
+      await fetch("/api/stop", { method: "POST" });
+      await refreshStatus();
+    });
+
+    setInterval(async () => {
+      await refreshStatus();
+      await refreshOutputs();
+    }, 2000);
+
+    refreshStatus();
+    refreshOutputs();
+  </script>
+</body>
+</html>

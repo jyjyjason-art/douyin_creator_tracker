@@ -10,6 +10,9 @@ Maintain and run the local Douyin creator video and commerce tracking workflow.
 - One target video ID.
 - A profile list file.
 - Collection mode: limit, target video, or all discoverable works.
+- Incremental strategy:
+  - Smart daily window for existing creators.
+  - Full scan fallback for new creators.
 - Output Excel path and evidence directory.
 
 ## Output Contract
@@ -45,12 +48,15 @@ Excel fields:
 2. Open or reuse the creator profile tab.
 3. Resolve final creator profile URL.
 4. Collect videos from DOM and `/aweme/v1/web/aweme/post/`.
-5. Skip existing `video_id`s when incremental mode is enabled.
-6. Open each video page.
-7. Extract title, publish time, product name, and real `product_id` from network responses first.
-8. Click product card only as fallback, then filter by title relevance.
-9. Write Excel and incremental index after every video.
-10. Read the Excel and report acceptance statistics.
+5. If `--all --incremental`, use smart window:
+   - existing creator: `(days_since_last_collect + lookback_days) * daily_max`
+   - new creator: full scan fallback
+6. Skip existing `video_id`s when incremental mode is enabled.
+7. Open each video page.
+8. Extract title, publish time, product name, and real `product_id` from network responses first.
+9. Click product card only as fallback, then filter by title relevance.
+10. Write Excel and incremental index after every video.
+11. Read the Excel and report acceptance statistics.
 
 ## Recovery Strategy
 

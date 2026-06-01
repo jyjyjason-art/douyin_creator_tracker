@@ -16,11 +16,13 @@ C:\cutting video\douyin_creator_tracker
 Typical requests:
 
 - Run a Douyin creator profile collection.
+- Run daily incremental checks without full profile scan every time.
 - Continue after network or CDP interruption.
 - Debug missing `product_id`.
 - Validate an Excel output.
 - Update project workflow or runbook.
 - Adjust humanized browser behavior.
+- Use the local web console to start/stop collection and inspect logs.
 
 ## Rules
 
@@ -32,6 +34,9 @@ Typical requests:
 - Do not click payment, follow, private message, or account-changing actions.
 - Keep `outputs/` and `evidence/` local; do not commit them.
 - Keep Windows awake during long collection runs.
+- Daily strategy:
+  - Existing creator: prefer `--all --incremental` with smart window.
+  - New creator: allow automatic full scan fallback.
 
 ## Standard Commands
 
@@ -46,13 +51,19 @@ python -m py_compile douyin_creator_tracker.py test_parser.py keep_awake.py
 Single creator:
 
 ```powershell
-python douyin_creator_tracker.py --profile-url "https://v.douyin.com/yrNAdFgturw/" --all --humanize --incremental --incremental-db "outputs\collected_index.json" --out "outputs\douyin_creator.xlsx" --evidence-dir "evidence\douyin_creator" --retries 2 --close-extra-tabs --max-tabs 3
+python douyin_creator_tracker.py --profile-url "https://v.douyin.com/yrNAdFgturw/" --all --humanize --incremental --incremental-db "outputs\collected_index.json" --incremental-daily-max 10 --incremental-lookback-days 1 --out "outputs\douyin_creator.xlsx" --evidence-dir "evidence\douyin_creator" --retries 2 --close-extra-tabs --max-tabs 3
 ```
 
 Multiple creators:
 
 ```powershell
-python douyin_creator_tracker.py --profile-list "profiles.txt" --all --humanize --incremental --incremental-db "outputs\collected_index.json" --out "outputs\douyin_batch.xlsx" --evidence-dir "evidence\douyin_batch" --retries 2 --close-extra-tabs --max-tabs 3
+python douyin_creator_tracker.py --profile-list "profiles.txt" --all --humanize --incremental --incremental-db "outputs\collected_index.json" --incremental-daily-max 10 --incremental-lookback-days 1 --out "outputs\douyin_batch.xlsx" --evidence-dir "evidence\douyin_batch" --retries 2 --close-extra-tabs --max-tabs 3
+```
+
+Web console:
+
+```powershell
+python web_app.py
 ```
 
 ## Resume Behavior
@@ -64,6 +75,12 @@ The project supports checkpoint resume:
 - Re-running the same command with `--incremental` skips collected `video_id`s.
 
 It does not yet include an always-on external runner that restarts Python automatically after process exit.
+
+Smart incremental window:
+
+- Active when `--all --incremental` and not disabled.
+- Window size = `(days_since_last_collect + incremental_lookback_days) * incremental_daily_max`.
+- New creator in index falls back to full scan.
 
 ## Validation
 

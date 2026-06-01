@@ -8,6 +8,7 @@ Maintain a reusable Douyin creator video and commerce tracking tool. Prioritize 
 
 - Project root: `C:\cutting video\douyin_creator_tracker`
 - Entry point: `douyin_creator_tracker.py`
+- Web console: `web_app.py`
 - Keep-awake helper: `keep_awake.py`
 - Outputs: `outputs\`
 - Evidence: `evidence\`
@@ -26,6 +27,12 @@ Maintain a reusable Douyin creator video and commerce tracking tool. Prioritize 
 - Update the incremental index after every video.
 - Use `--profile-list` for multiple creators.
 - Use `--incremental --incremental-db outputs\collected_index.json` for resume.
+- For daily incremental runs, keep `--all --incremental` and use smart window defaults:
+  - `--incremental-daily-max 10`
+  - `--incremental-lookback-days 1`
+- Smart window behavior:
+  - Existing creator: check roughly `(days_since_last_collect + lookback_days) * daily_max`.
+  - New creator in index: fallback to full scan automatically.
 - Keep Windows awake during long runs unless the user asks otherwise.
 - Keep failed videos as rows and continue the batch.
 
@@ -48,3 +55,4 @@ python -m py_compile douyin_creator_tracker.py test_parser.py keep_awake.py
 - Product card clicks can expose unrelated recommendations, so relevance filtering is required.
 - CDP can disconnect; reconnect and retry the current video when possible.
 - Checkpoint resume exists, but there is no external watchdog runner yet.
+- If `outputs\collected_index.json` is corrupted, smart incremental window and profile history matching may degrade to safer full scan behavior.

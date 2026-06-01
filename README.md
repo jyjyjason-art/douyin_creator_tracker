@@ -8,6 +8,7 @@ The tracker uses Google Chrome Stable through CDP and reuses the user's logged-i
 
 - Project root: `C:\cutting video\douyin_creator_tracker`
 - Main script: `douyin_creator_tracker.py`
+- Web console: `web_app.py`
 - Keep-awake helper: `keep_awake.py`
 - Results: `outputs\`
 - Logs, screenshots, evidence: `evidence\`
@@ -25,6 +26,9 @@ The tracker uses Google Chrome Stable through CDP and reuses the user's logged-i
 - Parse HAR files offline with `--har`.
 - Use humanized delays and idle scrolls with `--humanize`.
 - Resume by `video_id` with `--incremental`.
+- Smart incremental window for daily runs:
+  - Existing creators: auto-check a bounded top window instead of scanning all videos.
+  - New creators: automatic full scan fallback.
 - Write Excel checkpoints after every video.
 - Update `outputs\collected_index.json` after every video.
 - Limit extra Douyin tabs with `--close-extra-tabs --max-tabs 3`.
@@ -98,6 +102,18 @@ Collect multiple creators:
 python douyin_creator_tracker.py --profile-list "profiles.txt" --all --humanize --incremental --incremental-db "outputs\collected_index.json" --out "outputs\douyin_batch.xlsx" --evidence-dir "evidence\douyin_batch" --retries 2 --close-extra-tabs --max-tabs 3
 ```
 
+Daily incremental with smart window (recommended):
+
+```powershell
+python douyin_creator_tracker.py --profile-list "profiles.txt" --all --humanize --incremental --incremental-db "outputs\collected_index.json" --incremental-daily-max 10 --incremental-lookback-days 1 --out "outputs\douyin_daily.xlsx" --evidence-dir "evidence\douyin_daily" --retries 2 --close-extra-tabs --max-tabs 3
+```
+
+Disable smart window and force full scan while still skipping collected IDs:
+
+```powershell
+python douyin_creator_tracker.py --profile-url "https://www.douyin.com/user/xxx" --all --incremental --disable-smart-incremental-window --incremental-db "outputs\collected_index.json"
+```
+
 `profiles.txt` should contain one creator URL per line. Blank lines and lines starting with `#` are skipped.
 
 Collect one target video:
@@ -111,6 +127,28 @@ Parse HAR:
 ```powershell
 python douyin_creator_tracker.py --har "C:\path\to\douyin.har" --video-id 7644168958324866981 --out "outputs\douyin_har_product.xlsx"
 ```
+
+Start web console:
+
+```powershell
+python web_app.py
+```
+
+Open `http://127.0.0.1:5088`.
+
+## Smart Incremental Window
+
+- Active when:
+  - `--incremental` is enabled
+  - `--all` is enabled
+  - `--disable-smart-incremental-window` is not set
+- Formula:
+  - `window = (days_since_last_collect + incremental_lookback_days) * incremental_daily_max`
+- Defaults:
+  - `incremental_daily_max=10`
+  - `incremental_lookback_days=1`
+- New creator handling:
+  - If the creator has no history in `outputs\collected_index.json`, the tracker falls back to full scan.
 
 ## Validation
 

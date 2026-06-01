@@ -1218,6 +1218,42 @@ def load_incremental_index(path: Path) -> dict[str, Any]:
     return {"videos": {}, "profiles": {}}
 
 
+def profile_url_variants(url: str) -> list[str]:
+    value = (url or "").strip()
+    if not value:
+        return []
+    parsed = parse.urlsplit(value)
+    base = parse.urlunsplit((parsed.scheme, parsed.netloc, parsed.path, "", ""))
+    out: list[str] = []
+    for candidate in (value, base):
+        if candidate and candidate not in out:
+            out.append(candidate)
+    return out
+
+
+def latest_collect_time_for_profile(index: dict[str, Any], profile_url: str) -> datetime | None:
+    profiles = index.get("profiles", {})
+    videos = index.get("videos", {})
+    for key in profile_url_variants(profile_url):
+        bucket = profiles.get(key, {})
+        video_ids = bucket.get("video_ids") or []
+        latest_dt: datetime | None = None
+        for video_id in video_ids:
+            row = videos.get(str(video_id), {})
+            collect_time = str(row.get("collect_time") or "").strip()
+            if not collect_time:
+                continue
+            try:
+                dt = datetime.strptime(collect_time, "%Y-%m-%d %H:%M:%S")
+            except Exception:
+                continue
+            if latest_dt is None or dt > latest_dt:
+                latest_dt = dt
+        if latest_dt is not None:
+            return latest_dt
+    return None
+
+
 def save_incremental_index(path: Path, data: dict[str, Any]) -> None:
     ensure_dir(path.parent)
     path.write_text(json.dumps(data, ensure_ascii=False, indent=2), encoding="utf-8")
@@ -1258,6 +1294,23 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--retries", type=int, default=1, help="Retry count for a failed video after reconnecting CDP")
     parser.add_argument("--incremental", action="store_true", help="Skip videos already recorded in the incremental index")
     parser.add_argument("--incremental-db", type=Path, default=DEFAULT_INCREMENTAL_DB, help="Incremental index JSON path")
+    parser.add_argument(
+        "--incremental-daily-max",
+        type=int,
+        default=10,
+        help="Estimated max new videos per creator per day when using smart incremental window",
+    )
+    parser.add_argument(
+        "--incremental-lookback-days",
+        type=int,
+        default=1,
+        help="Extra buffer days added to day-gap when using smart incremental window",
+    )
+    parser.add_argument(
+        "--disable-smart-incremental-window",
+        action="store_true",
+        help="Disable smart incremental window and force full profile scan when --all is used",
+    )
     parser.add_argument("--close-extra-tabs", action="store_true", help="Close extra Douyin tabs before/after each creator run")
     parser.add_argument("--max-tabs", type=int, default=3, help="Maximum Douyin tabs to keep when --close-extra-tabs is enabled")
     parser.add_argument("--no-keep-awake", action="store_true", help="Do not request Windows to stay awake during collection")
@@ -1320,6 +1373,20 @@ def main() -> int:
             log(f"creator name: {creator_name or '(unknown)'}")
 
             requested_limit = 0 if args.all else args.limit
+            if args.incremental and args.all and not args.disable_smart_incremental_window:
+                last_collect = latest_collect_time_for_profile(incremental_index, final_profile_url)
+                if last_collect is None:
+                    requested_limit = 0
+                    log("smart incremental window: new creator in index, fallback to full scan")
+                else:
+                    day_gap = max(0, (datetime.now().date() - last_collect.date()).days)
+                    estimated = (day_gap + max(0, args.incremental_lookback_days)) * max(1, args.incremental_daily_max)
+                    requested_limit = max(1, estimated)
+                    log(
+                        "smart incremental window: "
+                        f"last_collect={last_collect.strftime('%Y-%m-%d %H:%M:%S')} "
+                        f"day_gap={day_gap} limit={requested_limit}"
+                    )
             videos = collect_profile_videos(
                 page,
                 requested_limit,
