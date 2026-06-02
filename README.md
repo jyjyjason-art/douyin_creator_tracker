@@ -13,6 +13,7 @@ The tracker uses Google Chrome Stable through CDP and reuses the user's logged-i
 - Results: `outputs\`
 - Logs, screenshots, evidence: `evidence\`
 - Incremental index: `outputs\collected_index.json`
+- Master creator list: `outputs\profiles_master.txt`
 
 `outputs\` and `evidence\` are local runtime artifacts and are intentionally ignored by Git.
 Exception: `outputs\collected_index.json` is intentionally tracked to preserve incremental history across environments.
@@ -61,7 +62,15 @@ Important limitation: checkpoint resume works, but there is no external watchdog
 - Role:
   - stores per-profile collected `video_id`s and per-video collection metadata
   - drives resume and dedupe behavior for `--incremental`
-  - provides last-collect timestamps for smart incremental window estimation
+- provides last-collect timestamps for smart incremental window estimation
+
+## Master Creator List
+
+- File: `outputs\profiles_master.txt`
+- Role:
+  - canonical list of all collected creator profile URLs
+  - recommended input for global incremental update runs
+  - deduped from collected history and maintained as a stable batch source
 
 ## Status Values
 

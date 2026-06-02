@@ -13,6 +13,7 @@ Maintain a reusable Douyin creator video and commerce tracking tool. Prioritize 
 - Outputs: `outputs\`
 - Evidence: `evidence\`
 - Incremental index: `outputs\collected_index.json`
+- Master creator list: `outputs\profiles_master.txt`
 - Test command: `python test_parser.py`
 
 ## Operating Rules
@@ -26,6 +27,7 @@ Maintain a reusable Douyin creator video and commerce tracking tool. Prioritize 
 - Write Excel after every video.
 - Update the incremental index after every video.
 - Use `--profile-list` for multiple creators.
+- Prefer `outputs\profiles_master.txt` as the canonical list of all collected creator links when doing global updates.
 - Use `--incremental --incremental-db outputs\collected_index.json` for resume.
 - For daily incremental runs, keep `--all --incremental` and use smart window defaults:
   - `--incremental-daily-max 10`
