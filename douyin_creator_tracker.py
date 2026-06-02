@@ -1327,7 +1327,10 @@ def main() -> int:
     log_path.write_text(f"[{now_text()}] start\n", encoding="utf-8")
 
     def log(message: str) -> None:
-        print(message, flush=True)
+        try:
+            print(message, flush=True)
+        except OSError:
+            pass
         with log_path.open("a", encoding="utf-8") as f:
             f.write(f"[{now_text()}] {message}\n")
 
