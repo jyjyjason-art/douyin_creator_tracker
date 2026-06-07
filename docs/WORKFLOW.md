@@ -5,13 +5,13 @@
 Close all Chrome windows, then start Chrome with CDP and the same user profile:
 
 ```powershell
-& "$env:ProgramFiles\Google\Chrome\Application\chrome.exe" --remote-debugging-port=9222 --user-data-dir="$env:LOCALAPPDATA\Google\Chrome\User Data" --profile-directory="Default"
+& "$env:ProgramFiles\Google\Chrome\Application\chrome.exe" --remote-debugging-port=9223 --user-data-dir="$env:LOCALAPPDATA\Google\Chrome\User Data" --profile-directory="Default"
 ```
 
 Check CDP:
 
 ```powershell
-Invoke-RestMethod http://127.0.0.1:9222/json/version
+Invoke-RestMethod http://127.0.0.1:9223/json/version
 ```
 
 Enter the project:

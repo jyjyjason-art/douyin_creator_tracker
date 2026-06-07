@@ -44,7 +44,7 @@ Excel fields:
 
 ## Standard Flow
 
-1. Verify CDP at `http://127.0.0.1:9222/json/version`.
+1. Verify CDP at `http://127.0.0.1:9223/json/version`.
 2. Open or reuse the creator profile tab.
 3. Resolve final creator profile URL.
 4. Collect videos from DOM and `/aweme/v1/web/aweme/post/`.

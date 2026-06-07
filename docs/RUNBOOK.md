@@ -11,7 +11,7 @@ cd "C:\cutting video\douyin_creator_tracker"
 Start Chrome CDP:
 
 ```powershell
-& "$env:ProgramFiles\Google\Chrome\Application\chrome.exe" --remote-debugging-port=9222 --user-data-dir="$env:LOCALAPPDATA\Google\Chrome\User Data" --profile-directory="Default"
+& "$env:ProgramFiles\Google\Chrome\Application\chrome.exe" --remote-debugging-port=9223 --user-data-dir="$env:LOCALAPPDATA\Google\Chrome\User Data" --profile-directory="Default"
 ```
 
 Single creator:
@@ -75,12 +75,12 @@ python keep_awake.py
 Symptoms:
 
 - `Cannot connect to Chrome CDP`
-- `http://127.0.0.1:9222/json/version` fails
+- `http://127.0.0.1:9223/json/version` fails
 
 Fix:
 
 1. Close all Chrome windows.
-2. Restart Chrome with `--remote-debugging-port=9222`.
+2. Restart Chrome with `--remote-debugging-port=9223`.
 3. Rerun the collection command with `--incremental`.
 
 ### CDP Disconnect or Stale Target

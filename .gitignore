@@ -4,10 +4,11 @@ __pycache__/
 .venv/
 venv/
 
-outputs/
-evidence/
-!outputs/
+outputs/*.xlsx
+outputs/*.csv
+outputs/*.json
 !outputs/collected_index.json
+evidence/
 
 *.log
 *.tmp

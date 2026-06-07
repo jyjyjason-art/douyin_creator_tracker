@@ -85,19 +85,19 @@ Important limitation: checkpoint resume works, but there is no external watchdog
 Close all Chrome windows first, then start Chrome with the same user data directory:
 
 ```powershell
-& "$env:ProgramFiles\Google\Chrome\Application\chrome.exe" --remote-debugging-port=9222 --user-data-dir="$env:LOCALAPPDATA\Google\Chrome\User Data" --profile-directory="Default"
+& "$env:ProgramFiles\Google\Chrome\Application\chrome.exe" --remote-debugging-port=9223 --user-data-dir="$env:LOCALAPPDATA\Google\Chrome\User Data" --profile-directory="Default"
 ```
 
 If Chrome is installed under Program Files (x86):
 
 ```powershell
-& "${env:ProgramFiles(x86)}\Google\Chrome\Application\chrome.exe" --remote-debugging-port=9222 --user-data-dir="$env:LOCALAPPDATA\Google\Chrome\User Data" --profile-directory="Default"
+& "${env:ProgramFiles(x86)}\Google\Chrome\Application\chrome.exe" --remote-debugging-port=9223 --user-data-dir="$env:LOCALAPPDATA\Google\Chrome\User Data" --profile-directory="Default"
 ```
 
 Check CDP:
 
 ```powershell
-Invoke-RestMethod http://127.0.0.1:9222/json/version
+Invoke-RestMethod http://127.0.0.1:9223/json/version
 ```
 
 ## Common Commands
