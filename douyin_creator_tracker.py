@@ -647,6 +647,9 @@ def collect_profile_videos(
     seen: dict[str, VideoCandidate] = {}
     stable_rounds = 0
     max_rounds = 260 if limit <= 0 else 80
+    expected_total = get_profile_video_total(page)
+    if expected_total:
+        log(f"profile declared total videos: {expected_total}")
     for round_no in range(max_rounds):
         for item in get_video_candidates_from_dom(page):
             key = item.video_id or item.video_url
@@ -677,8 +680,26 @@ def collect_profile_videos(
             stable_rounds += 1
         else:
             stable_rounds = 0
+        if len(seen) == before and limit <= 0 and stable_rounds in (4, 8, 12, 16):
+            result = kick_profile_lazy_load(page)
+            log(f"profile lazy-load kick result={result}")
+            if humanize:
+                human_pause(True, min_delay, max_delay, log, "profile lazy-load kick")
+            else:
+                time.sleep(2)
+            payloads = page.drain_json_payloads(max_items=80)
+            for item in get_video_candidates_from_payloads(payloads):
+                key = item.video_id or item.video_url
+                if key and key not in seen:
+                    seen[key] = item
+            for item in get_video_candidates_from_dom(page):
+                key = item.video_id or item.video_url
+                if key and key not in seen:
+                    seen[key] = item
         stable_limit = 12 if limit <= 0 else 8
         if stable_rounds >= stable_limit:
+            if expected_total and len(seen) < expected_total:
+                log(f"profile scan stalled before declared total: seen={len(seen)} expected={expected_total}")
             break
     if target_video_id:
         return []
@@ -752,6 +773,8 @@ def scroll_profile_container(page: CdpPage, screens: float) -> Any:
     document.scrollingElement || document.documentElement;
   const amount = Math.floor((container.clientHeight || window.innerHeight) * {screens:.3f});
   container.scrollBy(0, amount);
+  container.dispatchEvent(new Event('scroll', {{ bubbles: true }}));
+  window.dispatchEvent(new Event('scroll'));
   return {{
     tag: container.tagName,
     cls: String(container.className || '').slice(0, 100),
@@ -763,6 +786,49 @@ def scroll_profile_container(page: CdpPage, screens: float) -> Any:
 }})()
 """
     )
+
+
+def get_profile_video_total(page: CdpPage) -> int:
+    text = page.eval(
+        r"""
+(() => {
+  const texts = Array.from(document.querySelectorAll('*'))
+    .map(el => (el.innerText || '').replace(/\s+/g, ' ').trim())
+    .filter(Boolean);
+  return texts.find(t => /^作品\s*[\d.+万千]+$/.test(t)) || '';
+})()
+"""
+    ) or ""
+    match = re.search(r"作品\s*([\d.]+)([万千+]?)", str(text))
+    if not match:
+        return 0
+    value = float(match.group(1))
+    unit = match.group(2)
+    if unit == "万":
+        value *= 10000
+    elif unit == "千":
+        value *= 1000
+    return int(value)
+
+
+def kick_profile_lazy_load(page: CdpPage) -> Any:
+    try:
+        page.call("Input.dispatchMouseEvent", {"type": "mouseMoved", "x": 960, "y": 760})
+        for delta_y in (960, 1200, -320, 1400, 1600):
+            page.call(
+                "Input.dispatchMouseEvent",
+                {
+                    "type": "mouseWheel",
+                    "x": 960,
+                    "y": 760,
+                    "deltaX": 0,
+                    "deltaY": delta_y,
+                },
+            )
+            time.sleep(0.35)
+        return scroll_profile_container(page, 1.15)
+    except Exception as exc:
+        return {"error": str(exc)}
 
 
 def human_profile_idle(page: CdpPage, enabled: bool, min_delay: float, max_delay: float, log) -> None:
