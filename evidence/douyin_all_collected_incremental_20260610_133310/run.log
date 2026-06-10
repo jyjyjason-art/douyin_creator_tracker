@@ -1,0 +1,672 @@
+[2026-06-10 13:33:11] start
+[2026-06-10 13:33:11] keep-awake enabled with SetThreadExecutionState
+[2026-06-10 13:33:11] connecting Chrome CDP: http://127.0.0.1:9222
+[2026-06-10 13:33:11] opening profile 1/8: https://www.douyin.com/user/MS4wLjABAAAA-172HQ5SFcyboQgcS_BPlb-5QlvEEgVZQbEuWRp3FUBVFIO3GTq4a3iyB7qi17-x?from_tab_name=main
+[2026-06-10 13:33:19] resolved profile URL: https://www.douyin.com/user/MS4wLjABAAAA-172HQ5SFcyboQgcS_BPlb-5QlvEEgVZQbEuWRp3FUBVFIO3GTq4a3iyB7qi17-x?from_tab_name=main
+[2026-06-10 13:33:19] creator name: 依依（微胖孕期）
+[2026-06-10 13:33:19] smart incremental window: last_collect=2026-06-08 22:02:12 day_gap=2 limit=30
+[2026-06-10 13:33:19] profile declared total videos: 218
+[2026-06-10 13:33:19] profile scan round=1 videos=18
+[2026-06-10 13:33:19] profile forward page scroll result={'tag': 'DIV', 'cls': 'parent-route-container tmAgOewN route-scroll-container LYhLJEMy', 'scrollTop': 966.875, 'scrollHeight': 2029, 'clientHeight': 985, 'amount': 967}
+[2026-06-10 13:33:19] humanize profile scan: sleep 6.9s
+[2026-06-10 13:33:26] profile scan round=2 videos=18
+[2026-06-10 13:33:26] profile reverse page scroll result={'tag': 'DIV', 'cls': 'parent-route-container tmAgOewN route-scroll-container LYhLJEMy', 'scrollTop': 160.625, 'scrollHeight': 2109, 'clientHeight': 985, 'amount': -807}
+[2026-06-10 13:33:26] humanize profile reverse page scroll: sleep 3.2s
+[2026-06-10 13:33:29] profile forward page scroll result={'tag': 'DIV', 'cls': 'parent-route-container tmAgOewN route-scroll-container LYhLJEMy', 'scrollTop': 1123.75, 'scrollHeight': 2109, 'clientHeight': 985, 'amount': 1227}
+[2026-06-10 13:33:29] humanize profile scan: sleep 3.8s
+[2026-06-10 13:33:33] profile scan round=3 videos=18
+[2026-06-10 13:33:33] profile forward page scroll result={'tag': 'DIV', 'cls': 'parent-route-container tmAgOewN route-scroll-container LYhLJEMy', 'scrollTop': 1123.75, 'scrollHeight': 2109, 'clientHeight': 985, 'amount': 1216}
+[2026-06-10 13:33:33] humanize profile scan: sleep 4.0s
+[2026-06-10 13:33:37] profile scan round=4 videos=18
+[2026-06-10 13:33:37] profile reverse page scroll result={'tag': 'DIV', 'cls': 'parent-route-container tmAgOewN route-scroll-container LYhLJEMy', 'scrollTop': 343.75, 'scrollHeight': 2109, 'clientHeight': 985, 'amount': -780}
+[2026-06-10 13:33:37] humanize profile reverse page scroll: sleep 7.7s
+[2026-06-10 13:33:45] profile forward page scroll result={'tag': 'DIV', 'cls': 'parent-route-container tmAgOewN route-scroll-container LYhLJEMy', 'scrollTop': 1123.75, 'scrollHeight': 2109, 'clientHeight': 985, 'amount': 1160}
+[2026-06-10 13:33:45] humanize profile scan: sleep 7.2s
+[2026-06-10 13:33:53] profile scan round=5 videos=41
+[2026-06-10 13:33:53] incremental skipped existing videos: 25
+[2026-06-10 13:33:53] collected video cards: 5
+[2026-06-10 13:33:53] collecting profile 1/8 video 1/5: 7649319777043783401
+[2026-06-10 13:33:53] humanize before opening video: sleep 8.9s
+[2026-06-10 13:33:56] keep-awake enabled with SetThreadExecutionState
+[2026-06-10 13:34:05] humanize video reading: sleep 3.7s
+[2026-06-10 13:34:10] video 1 rows=1 status=ok
+[2026-06-10 13:34:10] checkpoint wrote Excel rows=1: C:\Users\Junzhang\Desktop\全自动混剪项目升级版\douyin_creator_tracker\outputs\douyin_all_collected_incremental_20260610_133310.xlsx
+[2026-06-10 13:34:10] collecting profile 1/8 video 2/5: 7649319591709210857
+[2026-06-10 13:34:13] profile idle scroll 1/2: {'tag': 'DIV', 'cls': 'parent-route-container tmAgOewN route-scroll-container LYhLJEMy', 'scrollTop': 0, 'scrollHeight': 2716, 'clientHeight': 985, 'amount': -1068}
+[2026-06-10 13:34:13] humanize profile idle scroll 1/2: sleep 7.8s
+[2026-06-10 13:34:21] profile idle scroll 2/2: {'tag': 'DIV', 'cls': 'parent-route-container tmAgOewN route-scroll-container LYhLJEMy', 'scrollTop': 981.25, 'scrollHeight': 3707, 'clientHeight': 985, 'amount': 981}
+[2026-06-10 13:34:21] humanize profile idle scroll 2/2: sleep 8.0s
+[2026-06-10 13:34:29] humanize profile idle reading: sleep 4.4s
+[2026-06-10 13:34:33] humanize before opening video: sleep 3.7s
+[2026-06-10 13:34:40] humanize video reading: sleep 4.3s
+[2026-06-10 13:34:41] keep-awake enabled with SetThreadExecutionState
+[2026-06-10 13:34:45] video 2 rows=1 status=ok
+[2026-06-10 13:34:45] checkpoint wrote Excel rows=2: C:\Users\Junzhang\Desktop\全自动混剪项目升级版\douyin_creator_tracker\outputs\douyin_all_collected_incremental_20260610_133310.xlsx
+[2026-06-10 13:34:45] collecting profile 1/8 video 3/5: 7649192449474284799
+[2026-06-10 13:34:47] profile idle scroll 1/1: {'tag': 'DIV', 'cls': 'parent-route-container tmAgOewN route-scroll-container LYhLJEMy', 'scrollTop': 891.25, 'scrollHeight': 2716, 'clientHeight': 985, 'amount': 891}
+[2026-06-10 13:34:47] humanize profile idle scroll 1/1: sleep 6.6s
+[2026-06-10 13:34:54] humanize profile idle reading: sleep 5.3s
+[2026-06-10 13:34:59] humanize before opening video: sleep 7.0s
+[2026-06-10 13:35:09] humanize video reading: sleep 3.7s
+[2026-06-10 13:35:13] video 3 rows=1 status=ok
+[2026-06-10 13:35:13] checkpoint wrote Excel rows=3: C:\Users\Junzhang\Desktop\全自动混剪项目升级版\douyin_creator_tracker\outputs\douyin_all_collected_incremental_20260610_133310.xlsx
+[2026-06-10 13:35:13] collecting profile 1/8 video 4/5: 7649192295296421284
+[2026-06-10 13:35:16] profile idle scroll 1/3: {'tag': 'DIV', 'cls': 'parent-route-container tmAgOewN route-scroll-container LYhLJEMy', 'scrollTop': 0, 'scrollHeight': 2716, 'clientHeight': 985, 'amount': -1067}
+[2026-06-10 13:35:16] humanize profile idle scroll 1/3: sleep 6.0s
+[2026-06-10 13:35:22] profile idle scroll 2/3: {'tag': 'DIV', 'cls': 'parent-route-container tmAgOewN route-scroll-container LYhLJEMy', 'scrollTop': 0, 'scrollHeight': 3707, 'clientHeight': 985, 'amount': -935}
+[2026-06-10 13:35:22] humanize profile idle scroll 2/3: sleep 8.2s
+[2026-06-10 13:35:26] keep-awake enabled with SetThreadExecutionState
+[2026-06-10 13:35:30] profile idle scroll 3/3: {'tag': 'DIV', 'cls': 'parent-route-container tmAgOewN route-scroll-container LYhLJEMy', 'scrollTop': 1010, 'scrollHeight': 3707, 'clientHeight': 985, 'amount': 1010}
+[2026-06-10 13:35:30] humanize profile idle scroll 3/3: sleep 5.4s
+[2026-06-10 13:35:36] humanize profile idle reading: sleep 3.5s
+[2026-06-10 13:35:39] humanize before opening video: sleep 7.4s
+[2026-06-10 13:35:49] humanize video reading: sleep 4.3s
+[2026-06-10 13:35:54] video 4 rows=1 status=ok
+[2026-06-10 13:35:54] checkpoint wrote Excel rows=4: C:\Users\Junzhang\Desktop\全自动混剪项目升级版\douyin_creator_tracker\outputs\douyin_all_collected_incremental_20260610_133310.xlsx
+[2026-06-10 13:35:54] collecting profile 1/8 video 5/5: 7649192168796838982
+[2026-06-10 13:35:57] profile idle scroll 1/2: {'tag': 'DIV', 'cls': 'parent-route-container tmAgOewN route-scroll-container LYhLJEMy', 'scrollTop': 798.125, 'scrollHeight': 2716, 'clientHeight': 985, 'amount': 798}
+[2026-06-10 13:35:57] humanize profile idle scroll 1/2: sleep 5.0s
+[2026-06-10 13:36:02] profile idle scroll 2/2: {'tag': 'DIV', 'cls': 'parent-route-container tmAgOewN route-scroll-container LYhLJEMy', 'scrollTop': 1669.375, 'scrollHeight': 4698, 'clientHeight': 985, 'amount': 871}
+[2026-06-10 13:36:02] humanize profile idle scroll 2/2: sleep 3.5s
+[2026-06-10 13:36:06] humanize before opening video: sleep 3.3s
+[2026-06-10 13:36:11] keep-awake enabled with SetThreadExecutionState
+[2026-06-10 13:36:12] humanize video reading: sleep 4.1s
+[2026-06-10 13:36:17] video 5 rows=1 status=ok
+[2026-06-10 13:36:17] checkpoint wrote Excel rows=5: C:\Users\Junzhang\Desktop\全自动混剪项目升级版\douyin_creator_tracker\outputs\douyin_all_collected_incremental_20260610_133310.xlsx
+[2026-06-10 13:36:17] opening profile 2/8: https://www.douyin.com/user/MS4wLjABAAAANQpW6ai-_cUoCD942LcLRsAsWs4M96P7_IaD9R7WKaBEfBY9kUaeyxNw8zl4tskw?from_tab_name=main
+[2026-06-10 13:36:23] resolved profile URL: https://www.douyin.com/user/MS4wLjABAAAANQpW6ai-_cUoCD942LcLRsAsWs4M96P7_IaD9R7WKaBEfBY9kUaeyxNw8zl4tskw?from_tab_name=main
+[2026-06-10 13:36:23] creator name: 果粒陈～（孕期版）
+[2026-06-10 13:36:23] smart incremental window: last_collect=2026-06-09 00:18:48 day_gap=1 limit=20
+[2026-06-10 13:36:23] profile declared total videos: 2436
+[2026-06-10 13:36:23] profile scan round=1 videos=54
+[2026-06-10 13:36:23] incremental skipped existing videos: 11
+[2026-06-10 13:36:23] collected video cards: 9
+[2026-06-10 13:36:23] collecting profile 2/8 video 1/9: 7649424036985111909
+[2026-06-10 13:36:23] humanize before opening video: sleep 5.3s
+[2026-06-10 13:36:31] humanize video reading: sleep 3.8s
+[2026-06-10 13:36:35] video 1 rows=1 status=partial_product_not_exposed
+[2026-06-10 13:36:35] checkpoint wrote Excel rows=6: C:\Users\Junzhang\Desktop\全自动混剪项目升级版\douyin_creator_tracker\outputs\douyin_all_collected_incremental_20260610_133310.xlsx
+[2026-06-10 13:36:35] collecting profile 2/8 video 2/9: 7649407500551382458
+[2026-06-10 13:36:38] profile idle scroll 1/2: {'tag': 'DIV', 'cls': 'parent-route-container tmAgOewN route-scroll-container LYhLJEMy', 'scrollTop': 0, 'scrollHeight': 2716, 'clientHeight': 985, 'amount': -816}
+[2026-06-10 13:36:38] humanize profile idle scroll 1/2: sleep 4.7s
+[2026-06-10 13:36:42] profile idle scroll 2/2: {'tag': 'DIV', 'cls': 'parent-route-container tmAgOewN route-scroll-container LYhLJEMy', 'scrollTop': 1073.125, 'scrollHeight': 2716, 'clientHeight': 985, 'amount': 1073}
+[2026-06-10 13:36:42] humanize profile idle scroll 2/2: sleep 8.1s
+[2026-06-10 13:36:51] humanize before opening video: sleep 7.6s
+[2026-06-10 13:36:56] keep-awake enabled with SetThreadExecutionState
+[2026-06-10 13:37:01] humanize video reading: sleep 3.2s
+[2026-06-10 13:37:05] video 2 rows=1 status=ok
+[2026-06-10 13:37:05] checkpoint wrote Excel rows=7: C:\Users\Junzhang\Desktop\全自动混剪项目升级版\douyin_creator_tracker\outputs\douyin_all_collected_incremental_20260610_133310.xlsx
+[2026-06-10 13:37:05] collecting profile 2/8 video 3/9: 7649387502231729061
+[2026-06-10 13:37:08] profile idle scroll 1/1: {'tag': 'DIV', 'cls': 'parent-route-container tmAgOewN route-scroll-container LYhLJEMy', 'scrollTop': 0, 'scrollHeight': 2716, 'clientHeight': 985, 'amount': -991}
+[2026-06-10 13:37:08] humanize profile idle scroll 1/1: sleep 7.5s
+[2026-06-10 13:37:15] humanize profile idle reading: sleep 7.4s
+[2026-06-10 13:37:23] humanize before opening video: sleep 4.1s
+[2026-06-10 13:37:30] humanize video reading: sleep 4.8s
+[2026-06-10 13:37:35] video 3 rows=1 status=ok
+[2026-06-10 13:37:35] checkpoint wrote Excel rows=8: C:\Users\Junzhang\Desktop\全自动混剪项目升级版\douyin_creator_tracker\outputs\douyin_all_collected_incremental_20260610_133310.xlsx
+[2026-06-10 13:37:35] collecting profile 2/8 video 4/9: 7649369383101912954
+[2026-06-10 13:37:38] profile idle scroll 1/3: {'tag': 'DIV', 'cls': 'parent-route-container tmAgOewN route-scroll-container LYhLJEMy', 'scrollTop': 0, 'scrollHeight': 1724, 'clientHeight': 985, 'amount': -855}
+[2026-06-10 13:37:38] humanize profile idle scroll 1/3: sleep 3.4s
+[2026-06-10 13:37:41] keep-awake enabled with SetThreadExecutionState
+[2026-06-10 13:37:42] profile idle scroll 2/3: {'tag': 'DIV', 'cls': 'parent-route-container tmAgOewN route-scroll-container LYhLJEMy', 'scrollTop': 1083.125, 'scrollHeight': 3707, 'clientHeight': 985, 'amount': 1083}
+[2026-06-10 13:37:42] humanize profile idle scroll 2/3: sleep 3.6s
+[2026-06-10 13:37:45] profile idle scroll 3/3: {'tag': 'DIV', 'cls': 'parent-route-container tmAgOewN route-scroll-container LYhLJEMy', 'scrollTop': 1881.875, 'scrollHeight': 3707, 'clientHeight': 985, 'amount': 799}
+[2026-06-10 13:37:45] humanize profile idle scroll 3/3: sleep 5.4s
+[2026-06-10 13:37:51] humanize before opening video: sleep 7.7s
+[2026-06-10 13:38:01] humanize video reading: sleep 3.3s
+[2026-06-10 13:38:05] video 4 rows=1 status=ok
+[2026-06-10 13:38:05] checkpoint wrote Excel rows=9: C:\Users\Junzhang\Desktop\全自动混剪项目升级版\douyin_creator_tracker\outputs\douyin_all_collected_incremental_20260610_133310.xlsx
+[2026-06-10 13:38:05] collecting profile 2/8 video 5/9: 7649343066743413989
+[2026-06-10 13:38:08] profile idle scroll 1/2: {'tag': 'DIV', 'cls': 'parent-route-container tmAgOewN route-scroll-container LYhLJEMy', 'scrollTop': 838.75, 'scrollHeight': 2716, 'clientHeight': 985, 'amount': 839}
+[2026-06-10 13:38:08] humanize profile idle scroll 1/2: sleep 4.8s
+[2026-06-10 13:38:13] profile idle scroll 2/2: {'tag': 'DIV', 'cls': 'parent-route-container tmAgOewN route-scroll-container LYhLJEMy', 'scrollTop': 0, 'scrollHeight': 4698, 'clientHeight': 985, 'amount': -971}
+[2026-06-10 13:38:13] humanize profile idle scroll 2/2: sleep 7.2s
+[2026-06-10 13:38:20] humanize profile idle reading: sleep 6.7s
+[2026-06-10 13:38:26] keep-awake enabled with SetThreadExecutionState
+[2026-06-10 13:38:27] humanize before opening video: sleep 6.7s
+[2026-06-10 13:38:36] humanize video reading: sleep 4.1s
+[2026-06-10 13:38:41] video 5 rows=1 status=ok
+[2026-06-10 13:38:41] checkpoint wrote Excel rows=10: C:\Users\Junzhang\Desktop\全自动混剪项目升级版\douyin_creator_tracker\outputs\douyin_all_collected_incremental_20260610_133310.xlsx
+[2026-06-10 13:38:41] collecting profile 2/8 video 6/9: 7649325382596526457
+[2026-06-10 13:38:44] profile idle scroll 1/1: {'tag': 'DIV', 'cls': 'parent-route-container tmAgOewN route-scroll-container LYhLJEMy', 'scrollTop': 1083.75, 'scrollHeight': 2716, 'clientHeight': 985, 'amount': 1084}
+[2026-06-10 13:38:44] humanize profile idle scroll 1/1: sleep 5.9s
+[2026-06-10 13:38:50] humanize profile idle reading: sleep 6.9s
+[2026-06-10 13:38:57] humanize before opening video: sleep 3.8s
+[2026-06-10 13:39:03] humanize video reading: sleep 4.7s
+[2026-06-10 13:39:08] video 6 rows=1 status=ok
+[2026-06-10 13:39:08] checkpoint wrote Excel rows=11: C:\Users\Junzhang\Desktop\全自动混剪项目升级版\douyin_creator_tracker\outputs\douyin_all_collected_incremental_20260610_133310.xlsx
+[2026-06-10 13:39:08] collecting profile 2/8 video 7/9: 7649293678867716529
+[2026-06-10 13:39:11] keep-awake enabled with SetThreadExecutionState
+[2026-06-10 13:39:11] profile idle scroll 1/3: {'tag': 'DIV', 'cls': 'parent-route-container tmAgOewN route-scroll-container LYhLJEMy', 'scrollTop': 739.375, 'scrollHeight': 1724, 'clientHeight': 985, 'amount': 976}
+[2026-06-10 13:39:11] humanize profile idle scroll 1/3: sleep 6.8s
+[2026-06-10 13:39:18] profile idle scroll 2/3: {'tag': 'DIV', 'cls': 'parent-route-container tmAgOewN route-scroll-container LYhLJEMy', 'scrollTop': 1553.125, 'scrollHeight': 4698, 'clientHeight': 985, 'amount': 814}
+[2026-06-10 13:39:18] humanize profile idle scroll 2/3: sleep 7.5s
+[2026-06-10 13:39:26] profile idle scroll 3/3: {'tag': 'DIV', 'cls': 'parent-route-container tmAgOewN route-scroll-container LYhLJEMy', 'scrollTop': 748.125, 'scrollHeight': 4698, 'clientHeight': 985, 'amount': -805}
+[2026-06-10 13:39:26] humanize profile idle scroll 3/3: sleep 5.3s
+[2026-06-10 13:39:31] humanize before opening video: sleep 3.4s
+[2026-06-10 13:39:37] humanize video reading: sleep 4.2s
+[2026-06-10 13:39:42] video 7 rows=1 status=ok
+[2026-06-10 13:39:42] checkpoint wrote Excel rows=12: C:\Users\Junzhang\Desktop\全自动混剪项目升级版\douyin_creator_tracker\outputs\douyin_all_collected_incremental_20260610_133310.xlsx
+[2026-06-10 13:39:42] collecting profile 2/8 video 8/9: 7649250594758072561
+[2026-06-10 13:39:45] profile idle scroll 1/2: {'tag': 'DIV', 'cls': 'parent-route-container tmAgOewN route-scroll-container LYhLJEMy', 'scrollTop': 793.75, 'scrollHeight': 2716, 'clientHeight': 985, 'amount': 794}
+[2026-06-10 13:39:45] humanize profile idle scroll 1/2: sleep 5.2s
+[2026-06-10 13:39:50] profile idle scroll 2/2: {'tag': 'DIV', 'cls': 'parent-route-container tmAgOewN route-scroll-container LYhLJEMy', 'scrollTop': 1778.75, 'scrollHeight': 4698, 'clientHeight': 985, 'amount': 985}
+[2026-06-10 13:39:50] humanize profile idle scroll 2/2: sleep 3.1s
+[2026-06-10 13:39:53] humanize profile idle reading: sleep 5.1s
+[2026-06-10 13:39:56] keep-awake enabled with SetThreadExecutionState
+[2026-06-10 13:39:58] humanize before opening video: sleep 5.0s
+[2026-06-10 13:40:06] humanize video reading: sleep 3.5s
+[2026-06-10 13:40:10] video 8 rows=1 status=ok
+[2026-06-10 13:40:10] checkpoint wrote Excel rows=13: C:\Users\Junzhang\Desktop\全自动混剪项目升级版\douyin_creator_tracker\outputs\douyin_all_collected_incremental_20260610_133310.xlsx
+[2026-06-10 13:40:10] collecting profile 2/8 video 9/9: 7649201158133684849
+[2026-06-10 13:40:13] profile idle scroll 1/1: {'tag': 'DIV', 'cls': 'parent-route-container tmAgOewN route-scroll-container LYhLJEMy', 'scrollTop': 0, 'scrollHeight': 2716, 'clientHeight': 985, 'amount': -795}
+[2026-06-10 13:40:13] humanize profile idle scroll 1/1: sleep 8.5s
+[2026-06-10 13:40:22] humanize before opening video: sleep 3.5s
+[2026-06-10 13:40:28] humanize video reading: sleep 3.1s
+[2026-06-10 13:40:32] video 9 rows=1 status=ok
+[2026-06-10 13:40:32] checkpoint wrote Excel rows=14: C:\Users\Junzhang\Desktop\全自动混剪项目升级版\douyin_creator_tracker\outputs\douyin_all_collected_incremental_20260610_133310.xlsx
+[2026-06-10 13:40:32] opening profile 3/8: https://www.douyin.com/user/MS4wLjABAAAAgbWrCSAJZObn4vzBCxjo9vHyV0kRRNtBIRnqg6e0na0?from_tab_name=main
+[2026-06-10 13:40:38] resolved profile URL: https://www.douyin.com/user/MS4wLjABAAAAgbWrCSAJZObn4vzBCxjo9vHyV0kRRNtBIRnqg6e0na0?from_tab_name=main
+[2026-06-10 13:40:38] creator name: 小鹿是新手妈妈（怀孕版）
+[2026-06-10 13:40:38] smart incremental window: last_collect=2026-06-09 00:17:21 day_gap=1 limit=20
+[2026-06-10 13:40:38] profile declared total videos: 1232
+[2026-06-10 13:40:38] profile scan round=1 videos=57
+[2026-06-10 13:40:38] incremental skipped existing videos: 19
+[2026-06-10 13:40:38] collected video cards: 1
+[2026-06-10 13:40:38] collecting profile 3/8 video 1/1: 7649291228299788721
+[2026-06-10 13:40:38] humanize before opening video: sleep 6.0s
+[2026-06-10 13:40:41] keep-awake enabled with SetThreadExecutionState
+[2026-06-10 13:40:47] humanize video reading: sleep 4.6s
+[2026-06-10 13:40:53] video 1 rows=1 status=ok
+[2026-06-10 13:40:53] checkpoint wrote Excel rows=15: C:\Users\Junzhang\Desktop\全自动混剪项目升级版\douyin_creator_tracker\outputs\douyin_all_collected_incremental_20260610_133310.xlsx
+[2026-06-10 13:40:53] opening profile 4/8: https://www.douyin.com/user/MS4wLjABAAAAiGmBlS9r1qi0r8PeGew2kv2vVPUUgfk3u-GQrlOAU25w5kVLKihX3DLH3-nU0G36?from_tab_name=main
+[2026-06-10 13:40:59] resolved profile URL: https://www.douyin.com/user/MS4wLjABAAAAiGmBlS9r1qi0r8PeGew2kv2vVPUUgfk3u-GQrlOAU25w5kVLKihX3DLH3-nU0G36?from_tab_name=main
+[2026-06-10 13:40:59] creator name: 小鹿是新手妈妈
+[2026-06-10 13:40:59] smart incremental window: last_collect=2026-06-09 00:48:10 day_gap=1 limit=20
+[2026-06-10 13:40:59] profile declared total videos: 886
+[2026-06-10 13:40:59] profile scan round=1 videos=57
+[2026-06-10 13:40:59] incremental skipped existing videos: 13
+[2026-06-10 13:40:59] collected video cards: 7
+[2026-06-10 13:40:59] collecting profile 4/8 video 1/7: 7649386366577982693
+[2026-06-10 13:40:59] humanize before opening video: sleep 7.7s
+[2026-06-10 13:41:09] humanize video reading: sleep 3.7s
+[2026-06-10 13:41:14] video 1 rows=1 status=ok
+[2026-06-10 13:41:14] checkpoint wrote Excel rows=16: C:\Users\Junzhang\Desktop\全自动混剪项目升级版\douyin_creator_tracker\outputs\douyin_all_collected_incremental_20260610_133310.xlsx
+[2026-06-10 13:41:14] collecting profile 4/8 video 2/7: 7649384769386351291
+[2026-06-10 13:41:17] profile idle scroll 1/2: {'tag': 'DIV', 'cls': 'parent-route-container tmAgOewN route-scroll-container LYhLJEMy', 'scrollTop': 1091.875, 'scrollHeight': 3046, 'clientHeight': 985, 'amount': 1092}
+[2026-06-10 13:41:17] humanize profile idle scroll 1/2: sleep 8.2s
+[2026-06-10 13:41:25] profile idle scroll 2/2: {'tag': 'DIV', 'cls': 'parent-route-container tmAgOewN route-scroll-container LYhLJEMy', 'scrollTop': 0, 'scrollHeight': 5029, 'clientHeight': 985, 'amount': -1132}
+[2026-06-10 13:41:25] humanize profile idle scroll 2/2: sleep 8.7s
+[2026-06-10 13:41:26] keep-awake enabled with SetThreadExecutionState
+[2026-06-10 13:41:34] humanize before opening video: sleep 6.3s
+[2026-06-10 13:41:43] humanize video reading: sleep 4.3s
+[2026-06-10 13:41:47] video 2 rows=1 status=ok
+[2026-06-10 13:41:47] checkpoint wrote Excel rows=17: C:\Users\Junzhang\Desktop\全自动混剪项目升级版\douyin_creator_tracker\outputs\douyin_all_collected_incremental_20260610_133310.xlsx
+[2026-06-10 13:41:47] collecting profile 4/8 video 3/7: 7649382352804120229
+[2026-06-10 13:41:50] profile idle scroll 1/3: {'tag': 'DIV', 'cls': 'parent-route-container tmAgOewN route-scroll-container LYhLJEMy', 'scrollTop': 1096.25, 'scrollHeight': 3046, 'clientHeight': 985, 'amount': 1096}
+[2026-06-10 13:41:50] humanize profile idle scroll 1/3: sleep 3.5s
+[2026-06-10 13:41:54] profile idle scroll 2/3: {'tag': 'DIV', 'cls': 'parent-route-container tmAgOewN route-scroll-container LYhLJEMy', 'scrollTop': 307.5, 'scrollHeight': 5029, 'clientHeight': 985, 'amount': -789}
+[2026-06-10 13:41:54] humanize profile idle scroll 2/3: sleep 5.6s
+[2026-06-10 13:42:00] profile idle scroll 3/3: {'tag': 'DIV', 'cls': 'parent-route-container tmAgOewN route-scroll-container LYhLJEMy', 'scrollTop': 0, 'scrollHeight': 5029, 'clientHeight': 985, 'amount': -1038}
+[2026-06-10 13:42:00] humanize profile idle scroll 3/3: sleep 4.7s
+[2026-06-10 13:42:04] humanize profile idle reading: sleep 8.2s
+[2026-06-10 13:42:11] keep-awake enabled with SetThreadExecutionState
+[2026-06-10 13:42:12] humanize before opening video: sleep 7.8s
+[2026-06-10 13:42:23] humanize video reading: sleep 4.2s
+[2026-06-10 13:42:28] video 3 rows=1 status=ok
+[2026-06-10 13:42:28] checkpoint wrote Excel rows=18: C:\Users\Junzhang\Desktop\全自动混剪项目升级版\douyin_creator_tracker\outputs\douyin_all_collected_incremental_20260610_133310.xlsx
+[2026-06-10 13:42:28] collecting profile 4/8 video 4/7: 7649381066810490481
+[2026-06-10 13:42:31] profile idle scroll 1/1: {'tag': 'DIV', 'cls': 'parent-route-container tmAgOewN route-scroll-container LYhLJEMy', 'scrollTop': 0, 'scrollHeight': 3046, 'clientHeight': 985, 'amount': -1140}
+[2026-06-10 13:42:31] humanize profile idle scroll 1/1: sleep 7.9s
+[2026-06-10 13:42:39] humanize before opening video: sleep 6.1s
+[2026-06-10 13:42:48] humanize video reading: sleep 3.1s
+[2026-06-10 13:42:52] video 4 rows=1 status=ok
+[2026-06-10 13:42:52] checkpoint wrote Excel rows=19: C:\Users\Junzhang\Desktop\全自动混剪项目升级版\douyin_creator_tracker\outputs\douyin_all_collected_incremental_20260610_133310.xlsx
+[2026-06-10 13:42:52] collecting profile 4/8 video 5/7: 7649379802865529701
+[2026-06-10 13:42:55] profile idle scroll 1/2: {'tag': 'DIV', 'cls': 'parent-route-container tmAgOewN route-scroll-container LYhLJEMy', 'scrollTop': 1025, 'scrollHeight': 3046, 'clientHeight': 985, 'amount': 1025}
+[2026-06-10 13:42:55] humanize profile idle scroll 1/2: sleep 4.1s
+[2026-06-10 13:42:56] keep-awake enabled with SetThreadExecutionState
+[2026-06-10 13:42:59] profile idle scroll 2/2: {'tag': 'DIV', 'cls': 'parent-route-container tmAgOewN route-scroll-container LYhLJEMy', 'scrollTop': 1866.25, 'scrollHeight': 5029, 'clientHeight': 985, 'amount': 841}
+[2026-06-10 13:42:59] humanize profile idle scroll 2/2: sleep 4.4s
+[2026-06-10 13:43:03] humanize profile idle reading: sleep 4.7s
+[2026-06-10 13:43:08] humanize before opening video: sleep 8.3s
+[2026-06-10 13:43:19] humanize video reading: sleep 3.5s
+[2026-06-10 13:43:23] video 5 rows=1 status=ok
+[2026-06-10 13:43:23] checkpoint wrote Excel rows=20: C:\Users\Junzhang\Desktop\全自动混剪项目升级版\douyin_creator_tracker\outputs\douyin_all_collected_incremental_20260610_133310.xlsx
+[2026-06-10 13:43:23] collecting profile 4/8 video 6/7: 7649292717374142395
+[2026-06-10 13:43:26] profile idle scroll 1/1: {'tag': 'DIV', 'cls': 'parent-route-container tmAgOewN route-scroll-container LYhLJEMy', 'scrollTop': 1156.25, 'scrollHeight': 3046, 'clientHeight': 985, 'amount': 1156}
+[2026-06-10 13:43:26] humanize profile idle scroll 1/1: sleep 5.4s
+[2026-06-10 13:43:32] humanize before opening video: sleep 7.7s
+[2026-06-10 13:43:41] keep-awake enabled with SetThreadExecutionState
+[2026-06-10 13:43:42] humanize video reading: sleep 4.2s
+[2026-06-10 13:43:47] video 6 rows=1 status=ok
+[2026-06-10 13:43:47] checkpoint wrote Excel rows=21: C:\Users\Junzhang\Desktop\全自动混剪项目升级版\douyin_creator_tracker\outputs\douyin_all_collected_incremental_20260610_133310.xlsx
+[2026-06-10 13:43:47] collecting profile 4/8 video 7/7: 7649288496826579429
+[2026-06-10 13:43:50] profile idle scroll 1/1: {'tag': 'DIV', 'cls': 'parent-route-container tmAgOewN route-scroll-container LYhLJEMy', 'scrollTop': 865, 'scrollHeight': 3046, 'clientHeight': 985, 'amount': 865}
+[2026-06-10 13:43:50] humanize profile idle scroll 1/1: sleep 6.9s
+[2026-06-10 13:43:57] humanize profile idle reading: sleep 7.5s
+[2026-06-10 13:44:04] humanize before opening video: sleep 6.3s
+[2026-06-10 13:44:13] humanize video reading: sleep 4.7s
+[2026-06-10 13:44:19] video 7 rows=1 status=ok
+[2026-06-10 13:44:19] checkpoint wrote Excel rows=22: C:\Users\Junzhang\Desktop\全自动混剪项目升级版\douyin_creator_tracker\outputs\douyin_all_collected_incremental_20260610_133310.xlsx
+[2026-06-10 13:44:19] opening profile 5/8: https://www.douyin.com/user/MS4wLjABAAAAyFZVSmhGi_0cmIO1LoMtITYrZEKQPMOOyBEac9JEyMo
+[2026-06-10 13:44:25] resolved profile URL: https://www.douyin.com/user/MS4wLjABAAAAyFZVSmhGi_0cmIO1LoMtITYrZEKQPMOOyBEac9JEyMo
+[2026-06-10 13:44:25] creator name: 是小鹿吖
+[2026-06-10 13:44:25] smart incremental window: last_collect=2026-06-09 00:57:54 day_gap=1 limit=20
+[2026-06-10 13:44:25] profile declared total videos: 129
+[2026-06-10 13:44:25] profile scan round=1 videos=56
+[2026-06-10 13:44:25] incremental skipped existing videos: 15
+[2026-06-10 13:44:25] collected video cards: 5
+[2026-06-10 13:44:25] collecting profile 5/8 video 1/5: 7649387920235306491
+[2026-06-10 13:44:25] humanize before opening video: sleep 7.2s
+[2026-06-10 13:44:26] keep-awake enabled with SetThreadExecutionState
+[2026-06-10 13:44:35] humanize video reading: sleep 4.6s
+[2026-06-10 13:44:40] video 1 rows=1 status=ok
+[2026-06-10 13:44:40] checkpoint wrote Excel rows=23: C:\Users\Junzhang\Desktop\全自动混剪项目升级版\douyin_creator_tracker\outputs\douyin_all_collected_incremental_20260610_133310.xlsx
+[2026-06-10 13:44:40] collecting profile 5/8 video 2/5: 7649378083765813669
+[2026-06-10 13:44:43] profile idle scroll 1/3: {'tag': 'DIV', 'cls': 'parent-route-container tmAgOewN route-scroll-container LYhLJEMy', 'scrollTop': 0, 'scrollHeight': 3046, 'clientHeight': 985, 'amount': -939}
+[2026-06-10 13:44:43] humanize profile idle scroll 1/3: sleep 6.8s
+[2026-06-10 13:44:49] profile idle scroll 2/3: {'tag': 'DIV', 'cls': 'parent-route-container tmAgOewN route-scroll-container LYhLJEMy', 'scrollTop': 0, 'scrollHeight': 4037, 'clientHeight': 985, 'amount': -1091}
+[2026-06-10 13:44:49] humanize profile idle scroll 2/3: sleep 4.8s
+[2026-06-10 13:44:54] profile idle scroll 3/3: {'tag': 'DIV', 'cls': 'parent-route-container tmAgOewN route-scroll-container LYhLJEMy', 'scrollTop': 901.25, 'scrollHeight': 4037, 'clientHeight': 985, 'amount': 901}
+[2026-06-10 13:44:54] humanize profile idle scroll 3/3: sleep 6.9s
+[2026-06-10 13:45:01] humanize before opening video: sleep 6.0s
+[2026-06-10 13:45:10] humanize video reading: sleep 3.5s
+[2026-06-10 13:45:11] keep-awake enabled with SetThreadExecutionState
+[2026-06-10 13:45:15] video 2 rows=1 status=ok
+[2026-06-10 13:45:15] checkpoint wrote Excel rows=24: C:\Users\Junzhang\Desktop\全自动混剪项目升级版\douyin_creator_tracker\outputs\douyin_all_collected_incremental_20260610_133310.xlsx
+[2026-06-10 13:45:15] collecting profile 5/8 video 3/5: 7649377030018869733
+[2026-06-10 13:45:18] profile idle scroll 1/1: {'tag': 'DIV', 'cls': 'parent-route-container tmAgOewN route-scroll-container LYhLJEMy', 'scrollTop': 1178.75, 'scrollHeight': 3046, 'clientHeight': 985, 'amount': 1179}
+[2026-06-10 13:45:18] humanize profile idle scroll 1/1: sleep 3.3s
+[2026-06-10 13:45:21] humanize profile idle reading: sleep 4.7s
+[2026-06-10 13:45:26] humanize before opening video: sleep 3.6s
+[2026-06-10 13:45:32] humanize video reading: sleep 4.1s
+[2026-06-10 13:45:37] video 3 rows=1 status=ok
+[2026-06-10 13:45:37] checkpoint wrote Excel rows=25: C:\Users\Junzhang\Desktop\全自动混剪项目升级版\douyin_creator_tracker\outputs\douyin_all_collected_incremental_20260610_133310.xlsx
+[2026-06-10 13:45:37] collecting profile 5/8 video 4/5: 7649369654994001317
+[2026-06-10 13:45:40] profile idle scroll 1/1: {'tag': 'DIV', 'cls': 'parent-route-container tmAgOewN route-scroll-container LYhLJEMy', 'scrollTop': 0, 'scrollHeight': 3046, 'clientHeight': 985, 'amount': -1122}
+[2026-06-10 13:45:40] humanize profile idle scroll 1/1: sleep 7.3s
+[2026-06-10 13:45:47] humanize before opening video: sleep 4.6s
+[2026-06-10 13:45:54] humanize video reading: sleep 4.7s
+[2026-06-10 13:45:56] keep-awake enabled with SetThreadExecutionState
+[2026-06-10 13:46:00] video 4 rows=1 status=ok
+[2026-06-10 13:46:00] checkpoint wrote Excel rows=26: C:\Users\Junzhang\Desktop\全自动混剪项目升级版\douyin_creator_tracker\outputs\douyin_all_collected_incremental_20260610_133310.xlsx
+[2026-06-10 13:46:00] collecting profile 5/8 video 5/5: 7649289871026364517
+[2026-06-10 13:46:03] profile idle scroll 1/1: {'tag': 'DIV', 'cls': 'parent-route-container tmAgOewN route-scroll-container LYhLJEMy', 'scrollTop': 1046.875, 'scrollHeight': 3046, 'clientHeight': 985, 'amount': 1047}
+[2026-06-10 13:46:03] humanize profile idle scroll 1/1: sleep 6.3s
+[2026-06-10 13:46:09] humanize profile idle reading: sleep 3.6s
+[2026-06-10 13:46:13] humanize before opening video: sleep 3.1s
+[2026-06-10 13:46:18] humanize video reading: sleep 4.1s
+[2026-06-10 13:46:23] video 5 rows=1 status=ok
+[2026-06-10 13:46:23] checkpoint wrote Excel rows=27: C:\Users\Junzhang\Desktop\全自动混剪项目升级版\douyin_creator_tracker\outputs\douyin_all_collected_incremental_20260610_133310.xlsx
+[2026-06-10 13:46:23] opening profile 6/8: https://www.douyin.com/user/MS4wLjABAAAAK6wTStrCkJpBH0lOdUqoYsmMCJbVhLZOzT_qH5ndRZf-_RtI9y2uPOaTzjPApPvu?from_tab_name=main
+[2026-06-10 13:46:29] resolved profile URL: https://www.douyin.com/user/MS4wLjABAAAAK6wTStrCkJpBH0lOdUqoYsmMCJbVhLZOzT_qH5ndRZf-_RtI9y2uPOaTzjPApPvu?from_tab_name=main
+[2026-06-10 13:46:29] creator name: 桃子猪猪（孕妇装疯狂上新版）
+[2026-06-10 13:46:29] smart incremental window: last_collect=2026-06-09 01:14:33 day_gap=1 limit=20
+[2026-06-10 13:46:29] profile declared total videos: 2989
+[2026-06-10 13:46:29] profile scan round=1 videos=57
+[2026-06-10 13:46:29] incremental skipped existing videos: 6
+[2026-06-10 13:46:29] collected video cards: 14
+[2026-06-10 13:46:29] collecting profile 6/8 video 1/14: 7649630205921167331
+[2026-06-10 13:46:29] humanize before opening video: sleep 6.5s
+[2026-06-10 13:46:38] humanize video reading: sleep 3.8s
+[2026-06-10 13:46:41] keep-awake enabled with SetThreadExecutionState
+[2026-06-10 13:46:43] video 1 rows=1 status=ok
+[2026-06-10 13:46:43] checkpoint wrote Excel rows=28: C:\Users\Junzhang\Desktop\全自动混剪项目升级版\douyin_creator_tracker\outputs\douyin_all_collected_incremental_20260610_133310.xlsx
+[2026-06-10 13:46:43] collecting profile 6/8 video 2/14: 7649610790900080832
+[2026-06-10 13:46:46] profile idle scroll 1/3: {'tag': 'DIV', 'cls': 'parent-route-container tmAgOewN route-scroll-container LYhLJEMy', 'scrollTop': 1163.75, 'scrollHeight': 3046, 'clientHeight': 985, 'amount': 1164}
+[2026-06-10 13:46:46] humanize profile idle scroll 1/3: sleep 6.7s
+[2026-06-10 13:46:53] profile idle scroll 2/3: {'tag': 'DIV', 'cls': 'parent-route-container tmAgOewN route-scroll-container LYhLJEMy', 'scrollTop': 2328.75, 'scrollHeight': 5029, 'clientHeight': 985, 'amount': 1165}
+[2026-06-10 13:46:53] humanize profile idle scroll 2/3: sleep 9.0s
+[2026-06-10 13:47:02] profile idle scroll 3/3: {'tag': 'DIV', 'cls': 'parent-route-container tmAgOewN route-scroll-container LYhLJEMy', 'scrollTop': 1200.625, 'scrollHeight': 5029, 'clientHeight': 985, 'amount': -1128}
+[2026-06-10 13:47:02] humanize profile idle scroll 3/3: sleep 5.9s
+[2026-06-10 13:47:08] humanize before opening video: sleep 7.8s
+[2026-06-10 13:47:19] humanize video reading: sleep 3.7s
+[2026-06-10 13:47:24] video 2 rows=1 status=ok
+[2026-06-10 13:47:24] checkpoint wrote Excel rows=29: C:\Users\Junzhang\Desktop\全自动混剪项目升级版\douyin_creator_tracker\outputs\douyin_all_collected_incremental_20260610_133310.xlsx
+[2026-06-10 13:47:24] collecting profile 6/8 video 3/14: 7649594748801801058
+[2026-06-10 13:47:26] keep-awake enabled with SetThreadExecutionState
+[2026-06-10 13:47:27] profile idle scroll 1/3: {'tag': 'DIV', 'cls': 'parent-route-container tmAgOewN route-scroll-container LYhLJEMy', 'scrollTop': 1163.125, 'scrollHeight': 3046, 'clientHeight': 985, 'amount': 1163}
+[2026-06-10 13:47:27] humanize profile idle scroll 1/3: sleep 4.4s
+[2026-06-10 13:47:31] profile idle scroll 2/3: {'tag': 'DIV', 'cls': 'parent-route-container tmAgOewN route-scroll-container LYhLJEMy', 'scrollTop': 2170, 'scrollHeight': 5029, 'clientHeight': 985, 'amount': 1007}
+[2026-06-10 13:47:31] humanize profile idle scroll 2/3: sleep 5.7s
+[2026-06-10 13:47:37] profile idle scroll 3/3: {'tag': 'DIV', 'cls': 'parent-route-container tmAgOewN route-scroll-container LYhLJEMy', 'scrollTop': 3276.875, 'scrollHeight': 5029, 'clientHeight': 985, 'amount': 1107}
+[2026-06-10 13:47:37] humanize profile idle scroll 3/3: sleep 6.0s
+[2026-06-10 13:47:43] humanize profile idle reading: sleep 5.4s
+[2026-06-10 13:47:48] humanize before opening video: sleep 4.2s
+[2026-06-10 13:47:55] humanize video reading: sleep 3.9s
+[2026-06-10 13:48:00] video 3 rows=1 status=ok
+[2026-06-10 13:48:00] checkpoint wrote Excel rows=30: C:\Users\Junzhang\Desktop\全自动混剪项目升级版\douyin_creator_tracker\outputs\douyin_all_collected_incremental_20260610_133310.xlsx
+[2026-06-10 13:48:00] collecting profile 6/8 video 4/14: 7649579941340817763
+[2026-06-10 13:48:03] profile idle scroll 1/3: {'tag': 'DIV', 'cls': 'parent-route-container tmAgOewN route-scroll-container LYhLJEMy', 'scrollTop': 915, 'scrollHeight': 3046, 'clientHeight': 985, 'amount': 915}
+[2026-06-10 13:48:03] humanize profile idle scroll 1/3: sleep 7.5s
+[2026-06-10 13:48:10] profile idle scroll 2/3: {'tag': 'DIV', 'cls': 'parent-route-container tmAgOewN route-scroll-container LYhLJEMy', 'scrollTop': 1786.875, 'scrollHeight': 5029, 'clientHeight': 985, 'amount': 872}
+[2026-06-10 13:48:10] humanize profile idle scroll 2/3: sleep 6.1s
+[2026-06-10 13:48:11] keep-awake enabled with SetThreadExecutionState
+[2026-06-10 13:48:17] profile idle scroll 3/3: {'tag': 'DIV', 'cls': 'parent-route-container tmAgOewN route-scroll-container LYhLJEMy', 'scrollTop': 828.125, 'scrollHeight': 5029, 'clientHeight': 985, 'amount': -959}
+[2026-06-10 13:48:17] humanize profile idle scroll 3/3: sleep 4.1s
+[2026-06-10 13:48:21] humanize profile idle reading: sleep 6.2s
+[2026-06-10 13:48:27] humanize before opening video: sleep 7.2s
+[2026-06-10 13:48:37] humanize video reading: sleep 3.7s
+[2026-06-10 13:48:41] video 4 rows=1 status=ok
+[2026-06-10 13:48:41] checkpoint wrote Excel rows=31: C:\Users\Junzhang\Desktop\全自动混剪项目升级版\douyin_creator_tracker\outputs\douyin_all_collected_incremental_20260610_133310.xlsx
+[2026-06-10 13:48:41] collecting profile 6/8 video 5/14: 7649356617972957312
+[2026-06-10 13:48:44] profile idle scroll 1/3: {'tag': 'DIV', 'cls': 'parent-route-container tmAgOewN route-scroll-container LYhLJEMy', 'scrollTop': 0, 'scrollHeight': 3046, 'clientHeight': 985, 'amount': -1157}
+[2026-06-10 13:48:44] humanize profile idle scroll 1/3: sleep 7.4s
+[2026-06-10 13:48:52] profile idle scroll 2/3: {'tag': 'DIV', 'cls': 'parent-route-container tmAgOewN route-scroll-container LYhLJEMy', 'scrollTop': 945, 'scrollHeight': 4037, 'clientHeight': 985, 'amount': 945}
+[2026-06-10 13:48:52] humanize profile idle scroll 2/3: sleep 7.1s
+[2026-06-10 13:48:56] keep-awake enabled with SetThreadExecutionState
+[2026-06-10 13:48:59] profile idle scroll 3/3: {'tag': 'DIV', 'cls': 'parent-route-container tmAgOewN route-scroll-container LYhLJEMy', 'scrollTop': 1790, 'scrollHeight': 4037, 'clientHeight': 985, 'amount': 845}
+[2026-06-10 13:48:59] humanize profile idle scroll 3/3: sleep 5.5s
+[2026-06-10 13:49:04] humanize before opening video: sleep 4.0s
+[2026-06-10 13:49:11] humanize video reading: sleep 3.3s
+[2026-06-10 13:49:15] video 5 rows=1 status=ok
+[2026-06-10 13:49:15] checkpoint wrote Excel rows=32: C:\Users\Junzhang\Desktop\全自动混剪项目升级版\douyin_creator_tracker\outputs\douyin_all_collected_incremental_20260610_133310.xlsx
+[2026-06-10 13:49:15] collecting profile 6/8 video 6/14: 7649342921578317416
+[2026-06-10 13:49:18] profile idle scroll 1/3: {'tag': 'DIV', 'cls': 'parent-route-container tmAgOewN route-scroll-container LYhLJEMy', 'scrollTop': 873.75, 'scrollHeight': 3046, 'clientHeight': 985, 'amount': 874}
+[2026-06-10 13:49:18] humanize profile idle scroll 1/3: sleep 6.8s
+[2026-06-10 13:49:25] profile idle scroll 2/3: {'tag': 'DIV', 'cls': 'parent-route-container tmAgOewN route-scroll-container LYhLJEMy', 'scrollTop': 1743.75, 'scrollHeight': 5029, 'clientHeight': 985, 'amount': 870}
+[2026-06-10 13:49:25] humanize profile idle scroll 2/3: sleep 3.7s
+[2026-06-10 13:49:29] profile idle scroll 3/3: {'tag': 'DIV', 'cls': 'parent-route-container tmAgOewN route-scroll-container LYhLJEMy', 'scrollTop': 660, 'scrollHeight': 5029, 'clientHeight': 985, 'amount': -1084}
+[2026-06-10 13:49:29] humanize profile idle scroll 3/3: sleep 8.6s
+[2026-06-10 13:49:37] humanize profile idle reading: sleep 3.7s
+[2026-06-10 13:49:41] humanize before opening video: sleep 3.7s
+[2026-06-10 13:49:41] keep-awake enabled with SetThreadExecutionState
+[2026-06-10 13:49:47] humanize video reading: sleep 4.2s
+[2026-06-10 13:49:52] video 6 rows=1 status=ok
+[2026-06-10 13:49:52] checkpoint wrote Excel rows=33: C:\Users\Junzhang\Desktop\全自动混剪项目升级版\douyin_creator_tracker\outputs\douyin_all_collected_incremental_20260610_133310.xlsx
+[2026-06-10 13:49:52] collecting profile 6/8 video 7/14: 7649334935358170216
+[2026-06-10 13:49:55] profile idle scroll 1/1: {'tag': 'DIV', 'cls': 'parent-route-container tmAgOewN route-scroll-container LYhLJEMy', 'scrollTop': 941.875, 'scrollHeight': 3046, 'clientHeight': 985, 'amount': 942}
+[2026-06-10 13:49:55] humanize profile idle scroll 1/1: sleep 5.0s
+[2026-06-10 13:50:00] humanize before opening video: sleep 7.4s
+[2026-06-10 13:50:11] humanize video reading: sleep 3.8s
+[2026-06-10 13:50:15] video 7 rows=1 status=ok
+[2026-06-10 13:50:15] checkpoint wrote Excel rows=34: C:\Users\Junzhang\Desktop\全自动混剪项目升级版\douyin_creator_tracker\outputs\douyin_all_collected_incremental_20260610_133310.xlsx
+[2026-06-10 13:50:15] collecting profile 6/8 video 8/14: 7649325093886040896
+[2026-06-10 13:50:18] profile idle scroll 1/1: {'tag': 'DIV', 'cls': 'parent-route-container tmAgOewN route-scroll-container LYhLJEMy', 'scrollTop': 811.875, 'scrollHeight': 3046, 'clientHeight': 985, 'amount': 812}
+[2026-06-10 13:50:18] humanize profile idle scroll 1/1: sleep 7.9s
+[2026-06-10 13:50:26] humanize before opening video: sleep 7.6s
+[2026-06-10 13:50:26] keep-awake enabled with SetThreadExecutionState
+[2026-06-10 13:50:36] humanize video reading: sleep 3.9s
+[2026-06-10 13:50:41] video 8 rows=1 status=ok
+[2026-06-10 13:50:41] checkpoint wrote Excel rows=35: C:\Users\Junzhang\Desktop\全自动混剪项目升级版\douyin_creator_tracker\outputs\douyin_all_collected_incremental_20260610_133310.xlsx
+[2026-06-10 13:50:41] collecting profile 6/8 video 9/14: 7649307362356780392
+[2026-06-10 13:50:44] profile idle scroll 1/1: {'tag': 'DIV', 'cls': 'parent-route-container tmAgOewN route-scroll-container LYhLJEMy', 'scrollTop': 0, 'scrollHeight': 3046, 'clientHeight': 985, 'amount': -1148}
+[2026-06-10 13:50:44] humanize profile idle scroll 1/1: sleep 8.9s
+[2026-06-10 13:50:53] humanize before opening video: sleep 5.1s
+[2026-06-10 13:51:01] humanize video reading: sleep 3.6s
+[2026-06-10 13:51:05] video 9 rows=1 status=ok
+[2026-06-10 13:51:05] checkpoint wrote Excel rows=36: C:\Users\Junzhang\Desktop\全自动混剪项目升级版\douyin_creator_tracker\outputs\douyin_all_collected_incremental_20260610_133310.xlsx
+[2026-06-10 13:51:05] collecting profile 6/8 video 10/14: 7649238131615551971
+[2026-06-10 13:51:08] profile idle scroll 1/1: {'tag': 'DIV', 'cls': 'parent-route-container tmAgOewN route-scroll-container LYhLJEMy', 'scrollTop': 0, 'scrollHeight': 3046, 'clientHeight': 985, 'amount': -1099}
+[2026-06-10 13:51:08] humanize profile idle scroll 1/1: sleep 3.5s
+[2026-06-10 13:51:11] humanize before opening video: sleep 6.2s
+[2026-06-10 13:51:11] keep-awake enabled with SetThreadExecutionState
+[2026-06-10 13:51:20] humanize video reading: sleep 3.2s
+[2026-06-10 13:51:24] video 10 rows=1 status=ok
+[2026-06-10 13:51:24] checkpoint wrote Excel rows=37: C:\Users\Junzhang\Desktop\全自动混剪项目升级版\douyin_creator_tracker\outputs\douyin_all_collected_incremental_20260610_133310.xlsx
+[2026-06-10 13:51:24] collecting profile 6/8 video 11/14: 7649262974100182336
+[2026-06-10 13:51:27] profile idle scroll 1/1: {'tag': 'DIV', 'cls': 'parent-route-container tmAgOewN route-scroll-container LYhLJEMy', 'scrollTop': 0, 'scrollHeight': 3046, 'clientHeight': 985, 'amount': -1166}
+[2026-06-10 13:51:27] humanize profile idle scroll 1/1: sleep 3.1s
+[2026-06-10 13:51:30] humanize profile idle reading: sleep 4.7s
+[2026-06-10 13:51:35] humanize before opening video: sleep 4.0s
+[2026-06-10 13:51:41] humanize video reading: sleep 3.4s
+[2026-06-10 13:51:45] video 11 rows=1 status=ok
+[2026-06-10 13:51:45] checkpoint wrote Excel rows=38: C:\Users\Junzhang\Desktop\全自动混剪项目升级版\douyin_creator_tracker\outputs\douyin_all_collected_incremental_20260610_133310.xlsx
+[2026-06-10 13:51:45] collecting profile 6/8 video 12/14: 7649252264474352052
+[2026-06-10 13:51:49] profile idle scroll 1/1: {'tag': 'DIV', 'cls': 'parent-route-container tmAgOewN route-scroll-container LYhLJEMy', 'scrollTop': 0, 'scrollHeight': 3046, 'clientHeight': 985, 'amount': -1084}
+[2026-06-10 13:51:49] humanize profile idle scroll 1/1: sleep 9.0s
+[2026-06-10 13:51:56] keep-awake enabled with SetThreadExecutionState
+[2026-06-10 13:51:58] humanize before opening video: sleep 6.5s
+[2026-06-10 13:52:07] humanize video reading: sleep 4.4s
+[2026-06-10 13:52:12] video 12 rows=1 status=ok
+[2026-06-10 13:52:12] checkpoint wrote Excel rows=39: C:\Users\Junzhang\Desktop\全自动混剪项目升级版\douyin_creator_tracker\outputs\douyin_all_collected_incremental_20260610_133310.xlsx
+[2026-06-10 13:52:12] collecting profile 6/8 video 13/14: 7649237412635895616
+[2026-06-10 13:52:15] profile idle scroll 1/2: {'tag': 'DIV', 'cls': 'parent-route-container tmAgOewN route-scroll-container LYhLJEMy', 'scrollTop': 0, 'scrollHeight': 3046, 'clientHeight': 985, 'amount': -846}
+[2026-06-10 13:52:15] humanize profile idle scroll 1/2: sleep 3.2s
+[2026-06-10 13:52:18] profile idle scroll 2/2: {'tag': 'DIV', 'cls': 'parent-route-container tmAgOewN route-scroll-container LYhLJEMy', 'scrollTop': 1086.875, 'scrollHeight': 4037, 'clientHeight': 985, 'amount': 1087}
+[2026-06-10 13:52:18] humanize profile idle scroll 2/2: sleep 6.1s
+[2026-06-10 13:52:25] humanize profile idle reading: sleep 3.2s
+[2026-06-10 13:52:28] humanize before opening video: sleep 8.2s
+[2026-06-10 13:52:39] humanize video reading: sleep 4.0s
+[2026-06-10 13:52:41] keep-awake enabled with SetThreadExecutionState
+[2026-06-10 13:52:43] video 13 rows=1 status=ok
+[2026-06-10 13:52:43] checkpoint wrote Excel rows=40: C:\Users\Junzhang\Desktop\全自动混剪项目升级版\douyin_creator_tracker\outputs\douyin_all_collected_incremental_20260610_133310.xlsx
+[2026-06-10 13:52:43] collecting profile 6/8 video 14/14: 7649226401098572864
+[2026-06-10 13:52:46] profile idle scroll 1/2: {'tag': 'DIV', 'cls': 'parent-route-container tmAgOewN route-scroll-container LYhLJEMy', 'scrollTop': 823.75, 'scrollHeight': 3046, 'clientHeight': 985, 'amount': 824}
+[2026-06-10 13:52:46] humanize profile idle scroll 1/2: sleep 6.3s
+[2026-06-10 13:52:53] profile idle scroll 2/2: {'tag': 'DIV', 'cls': 'parent-route-container tmAgOewN route-scroll-container LYhLJEMy', 'scrollTop': 1867.5, 'scrollHeight': 4037, 'clientHeight': 985, 'amount': 1044}
+[2026-06-10 13:52:53] humanize profile idle scroll 2/2: sleep 3.6s
+[2026-06-10 13:52:56] humanize before opening video: sleep 7.7s
+[2026-06-10 13:53:07] humanize video reading: sleep 3.5s
+[2026-06-10 13:53:11] video 14 rows=1 status=ok
+[2026-06-10 13:53:11] checkpoint wrote Excel rows=41: C:\Users\Junzhang\Desktop\全自动混剪项目升级版\douyin_creator_tracker\outputs\douyin_all_collected_incremental_20260610_133310.xlsx
+[2026-06-10 13:53:11] opening profile 7/8: https://www.douyin.com/user/MS4wLjABAAAAsmB5GayCyRXxNnV77ls511IeUehmJH47WGZMZ6Jqdd3pEeHLJZJUoFszDtu8zQWs?from_tab_name=main
+[2026-06-10 13:53:17] resolved profile URL: https://www.douyin.com/user/MS4wLjABAAAAsmB5GayCyRXxNnV77ls511IeUehmJH47WGZMZ6Jqdd3pEeHLJZJUoFszDtu8zQWs?from_tab_name=main
+[2026-06-10 13:53:17] creator name: 贝兜哒哒（孕妇装测评）
+[2026-06-10 13:53:17] smart incremental window: last_collect=2026-06-09 01:17:39 day_gap=1 limit=20
+[2026-06-10 13:53:17] profile declared total videos: 432
+[2026-06-10 13:53:17] profile scan round=1 videos=57
+[2026-06-10 13:53:17] incremental skipped existing videos: 15
+[2026-06-10 13:53:17] collected video cards: 5
+[2026-06-10 13:53:17] collecting profile 7/8 video 1/5: 7649394971115619466
+[2026-06-10 13:53:17] humanize before opening video: sleep 4.4s
+[2026-06-10 13:53:24] humanize video reading: sleep 3.2s
+[2026-06-10 13:53:26] keep-awake enabled with SetThreadExecutionState
+[2026-06-10 13:53:28] video 1 rows=1 status=ok
+[2026-06-10 13:53:28] checkpoint wrote Excel rows=42: C:\Users\Junzhang\Desktop\全自动混剪项目升级版\douyin_creator_tracker\outputs\douyin_all_collected_incremental_20260610_133310.xlsx
+[2026-06-10 13:53:28] collecting profile 7/8 video 2/5: 7649383011951773019
+[2026-06-10 13:53:31] profile idle scroll 1/3: {'tag': 'DIV', 'cls': 'parent-route-container tmAgOewN route-scroll-container LYhLJEMy', 'scrollTop': 0, 'scrollHeight': 2055, 'clientHeight': 985, 'amount': -994}
+[2026-06-10 13:53:31] humanize profile idle scroll 1/3: sleep 7.1s
+[2026-06-10 13:53:38] profile idle scroll 2/3: {'tag': 'DIV', 'cls': 'parent-route-container tmAgOewN route-scroll-container LYhLJEMy', 'scrollTop': 898.75, 'scrollHeight': 4037, 'clientHeight': 985, 'amount': 899}
+[2026-06-10 13:53:38] humanize profile idle scroll 2/3: sleep 3.3s
+[2026-06-10 13:53:41] profile idle scroll 3/3: {'tag': 'DIV', 'cls': 'parent-route-container tmAgOewN route-scroll-container LYhLJEMy', 'scrollTop': 1787.5, 'scrollHeight': 4037, 'clientHeight': 985, 'amount': 889}
+[2026-06-10 13:53:41] humanize profile idle scroll 3/3: sleep 3.7s
+[2026-06-10 13:53:45] humanize before opening video: sleep 4.0s
+[2026-06-10 13:53:52] humanize video reading: sleep 4.5s
+[2026-06-10 13:53:57] video 2 rows=1 status=ok
+[2026-06-10 13:53:57] checkpoint wrote Excel rows=43: C:\Users\Junzhang\Desktop\全自动混剪项目升级版\douyin_creator_tracker\outputs\douyin_all_collected_incremental_20260610_133310.xlsx
+[2026-06-10 13:53:57] collecting profile 7/8 video 3/5: 7649366789823140018
+[2026-06-10 13:54:00] profile idle scroll 1/2: {'tag': 'DIV', 'cls': 'parent-route-container tmAgOewN route-scroll-container LYhLJEMy', 'scrollTop': 57.5, 'scrollHeight': 1043, 'clientHeight': 985, 'amount': 808}
+[2026-06-10 13:54:00] humanize profile idle scroll 1/2: sleep 5.2s
+[2026-06-10 13:54:05] profile idle scroll 2/2: {'tag': 'DIV', 'cls': 'parent-route-container tmAgOewN route-scroll-container LYhLJEMy', 'scrollTop': 0, 'scrollHeight': 1043, 'clientHeight': 985, 'amount': -975}
+[2026-06-10 13:54:05] humanize profile idle scroll 2/2: sleep 4.5s
+[2026-06-10 13:54:09] humanize before opening video: sleep 4.7s
+[2026-06-10 13:54:11] keep-awake enabled with SetThreadExecutionState
+[2026-06-10 13:54:17] humanize video reading: sleep 4.2s
+[2026-06-10 13:54:22] video 3 rows=1 status=ok
+[2026-06-10 13:54:22] checkpoint wrote Excel rows=44: C:\Users\Junzhang\Desktop\全自动混剪项目升级版\douyin_creator_tracker\outputs\douyin_all_collected_incremental_20260610_133310.xlsx
+[2026-06-10 13:54:22] collecting profile 7/8 video 4/5: 7649352797444901258
+[2026-06-10 13:54:25] profile idle scroll 1/2: {'tag': 'DIV', 'cls': 'parent-route-container tmAgOewN route-scroll-container LYhLJEMy', 'scrollTop': 1008.125, 'scrollHeight': 2055, 'clientHeight': 985, 'amount': 1008}
+[2026-06-10 13:54:25] humanize profile idle scroll 1/2: sleep 7.2s
+[2026-06-10 13:54:32] profile idle scroll 2/2: {'tag': 'DIV', 'cls': 'parent-route-container tmAgOewN route-scroll-container LYhLJEMy', 'scrollTop': 2141.875, 'scrollHeight': 4037, 'clientHeight': 985, 'amount': 1134}
+[2026-06-10 13:54:32] humanize profile idle scroll 2/2: sleep 3.5s
+[2026-06-10 13:54:35] humanize profile idle reading: sleep 4.3s
+[2026-06-10 13:54:40] humanize before opening video: sleep 8.3s
+[2026-06-10 13:54:51] humanize video reading: sleep 4.9s
+[2026-06-10 13:54:56] keep-awake enabled with SetThreadExecutionState
+[2026-06-10 13:54:57] video 4 rows=1 status=ok
+[2026-06-10 13:54:57] checkpoint wrote Excel rows=45: C:\Users\Junzhang\Desktop\全自动混剪项目升级版\douyin_creator_tracker\outputs\douyin_all_collected_incremental_20260610_133310.xlsx
+[2026-06-10 13:54:57] collecting profile 7/8 video 5/5: 7649333479964304114
+[2026-06-10 13:55:00] profile idle scroll 1/2: {'tag': 'DIV', 'cls': 'parent-route-container tmAgOewN route-scroll-container LYhLJEMy', 'scrollTop': 0, 'scrollHeight': 2055, 'clientHeight': 985, 'amount': -1141}
+[2026-06-10 13:55:00] humanize profile idle scroll 1/2: sleep 8.5s
+[2026-06-10 13:55:08] profile idle scroll 2/2: {'tag': 'DIV', 'cls': 'parent-route-container tmAgOewN route-scroll-container LYhLJEMy', 'scrollTop': 1055, 'scrollHeight': 3046, 'clientHeight': 985, 'amount': 1055}
+[2026-06-10 13:55:08] humanize profile idle scroll 2/2: sleep 6.8s
+[2026-06-10 13:55:15] humanize profile idle reading: sleep 7.4s
+[2026-06-10 13:55:23] humanize before opening video: sleep 5.8s
+[2026-06-10 13:55:31] humanize video reading: sleep 3.1s
+[2026-06-10 13:55:37] video 5 rows=1 status=ok
+[2026-06-10 13:55:37] checkpoint wrote Excel rows=46: C:\Users\Junzhang\Desktop\全自动混剪项目升级版\douyin_creator_tracker\outputs\douyin_all_collected_incremental_20260610_133310.xlsx
+[2026-06-10 13:55:37] opening profile 8/8: https://www.douyin.com/user/MS4wLjABAAAAXCIXgXoUXHtmHzp_UwD5go9fJcV1B_gdrQ-B8Pq0FSwfGdoOdC9jsgT9_7-UKD42?from_tab_name=main
+[2026-06-10 13:55:41] keep-awake enabled with SetThreadExecutionState
+[2026-06-10 13:55:43] resolved profile URL: https://www.douyin.com/user/MS4wLjABAAAAXCIXgXoUXHtmHzp_UwD5go9fJcV1B_gdrQ-B8Pq0FSwfGdoOdC9jsgT9_7-UKD42?from_tab_name=main
+[2026-06-10 13:55:43] creator name: 珍妮小个子（孕期版）
+[2026-06-10 13:55:43] smart incremental window: last_collect=2026-06-09 01:47:04 day_gap=1 limit=20
+[2026-06-10 13:55:43] profile declared total videos: 1285
+[2026-06-10 13:55:43] profile scan round=1 videos=36
+[2026-06-10 13:55:43] incremental skipped existing videos: 3
+[2026-06-10 13:55:43] collected video cards: 17
+[2026-06-10 13:55:43] collecting profile 8/8 video 1/17: 7649429068366301041
+[2026-06-10 13:55:43] humanize before opening video: sleep 9.0s
+[2026-06-10 13:55:55] humanize video reading: sleep 4.1s
+[2026-06-10 13:56:01] video 1 rows=1 status=ok
+[2026-06-10 13:56:01] checkpoint wrote Excel rows=47: C:\Users\Junzhang\Desktop\全自动混剪项目升级版\douyin_creator_tracker\outputs\douyin_all_collected_incremental_20260610_133310.xlsx
+[2026-06-10 13:56:01] collecting profile 8/8 video 2/17: 7649428755237514106
+[2026-06-10 13:56:03] profile idle scroll 1/1: {'tag': 'DIV', 'cls': 'parent-route-container tmAgOewN route-scroll-container LYhLJEMy', 'scrollTop': 739.375, 'scrollHeight': 1724, 'clientHeight': 985, 'amount': 1038}
+[2026-06-10 13:56:03] humanize profile idle scroll 1/1: sleep 5.8s
+[2026-06-10 13:56:09] humanize profile idle reading: sleep 3.1s
+[2026-06-10 13:56:12] humanize before opening video: sleep 4.5s
+[2026-06-10 13:56:19] humanize video reading: sleep 4.4s
+[2026-06-10 13:56:25] video 2 rows=1 status=ok
+[2026-06-10 13:56:25] checkpoint wrote Excel rows=48: C:\Users\Junzhang\Desktop\全自动混剪项目升级版\douyin_creator_tracker\outputs\douyin_all_collected_incremental_20260610_133310.xlsx
+[2026-06-10 13:56:25] collecting profile 8/8 video 3/17: 7649428302243949819
+[2026-06-10 13:56:26] keep-awake enabled with SetThreadExecutionState
+[2026-06-10 13:56:28] profile idle scroll 1/3: {'tag': 'DIV', 'cls': 'parent-route-container tmAgOewN route-scroll-container LYhLJEMy', 'scrollTop': 739.375, 'scrollHeight': 1724, 'clientHeight': 985, 'amount': 916}
+[2026-06-10 13:56:28] humanize profile idle scroll 1/3: sleep 6.1s
+[2026-06-10 13:56:34] profile idle scroll 2/3: {'tag': 'DIV', 'cls': 'parent-route-container tmAgOewN route-scroll-container LYhLJEMy', 'scrollTop': 1658.125, 'scrollHeight': 4698, 'clientHeight': 985, 'amount': 919}
+[2026-06-10 13:56:34] humanize profile idle scroll 2/3: sleep 6.1s
+[2026-06-10 13:56:40] profile idle scroll 3/3: {'tag': 'DIV', 'cls': 'parent-route-container tmAgOewN route-scroll-container LYhLJEMy', 'scrollTop': 2661.25, 'scrollHeight': 4698, 'clientHeight': 985, 'amount': 1003}
+[2026-06-10 13:56:40] humanize profile idle scroll 3/3: sleep 6.9s
+[2026-06-10 13:56:47] humanize before opening video: sleep 5.3s
+[2026-06-10 13:56:55] humanize video reading: sleep 3.4s
+[2026-06-10 13:57:00] video 3 rows=1 status=ok
+[2026-06-10 13:57:00] checkpoint wrote Excel rows=49: C:\Users\Junzhang\Desktop\全自动混剪项目升级版\douyin_creator_tracker\outputs\douyin_all_collected_incremental_20260610_133310.xlsx
+[2026-06-10 13:57:00] collecting profile 8/8 video 4/17: 7649428055669412465
+[2026-06-10 13:57:03] profile idle scroll 1/3: {'tag': 'DIV', 'cls': 'parent-route-container tmAgOewN route-scroll-container LYhLJEMy', 'scrollTop': 0, 'scrollHeight': 1724, 'clientHeight': 985, 'amount': -952}
+[2026-06-10 13:57:03] humanize profile idle scroll 1/3: sleep 8.1s
+[2026-06-10 13:57:11] profile idle scroll 2/3: {'tag': 'DIV', 'cls': 'parent-route-container tmAgOewN route-scroll-container LYhLJEMy', 'scrollTop': 0, 'scrollHeight': 3707, 'clientHeight': 985, 'amount': -934}
+[2026-06-10 13:57:11] humanize profile idle scroll 2/3: sleep 6.4s
+[2026-06-10 13:57:11] keep-awake enabled with SetThreadExecutionState
+[2026-06-10 13:57:17] profile idle scroll 3/3: {'tag': 'DIV', 'cls': 'parent-route-container tmAgOewN route-scroll-container LYhLJEMy', 'scrollTop': 1028.125, 'scrollHeight': 3707, 'clientHeight': 985, 'amount': 1028}
+[2026-06-10 13:57:17] humanize profile idle scroll 3/3: sleep 8.0s
+[2026-06-10 13:57:25] humanize before opening video: sleep 8.6s
+[2026-06-10 13:57:37] humanize video reading: sleep 3.7s
+[2026-06-10 13:57:42] video 4 rows=1 status=ok
+[2026-06-10 13:57:42] checkpoint wrote Excel rows=50: C:\Users\Junzhang\Desktop\全自动混剪项目升级版\douyin_creator_tracker\outputs\douyin_all_collected_incremental_20260610_133310.xlsx
+[2026-06-10 13:57:42] collecting profile 8/8 video 5/17: 7649427803918216305
+[2026-06-10 13:57:45] profile idle scroll 1/2: {'tag': 'DIV', 'cls': 'parent-route-container tmAgOewN route-scroll-container LYhLJEMy', 'scrollTop': 739.375, 'scrollHeight': 1724, 'clientHeight': 985, 'amount': 819}
+[2026-06-10 13:57:45] humanize profile idle scroll 1/2: sleep 5.3s
+[2026-06-10 13:57:50] profile idle scroll 2/2: {'tag': 'DIV', 'cls': 'parent-route-container tmAgOewN route-scroll-container LYhLJEMy', 'scrollTop': 1736.25, 'scrollHeight': 3707, 'clientHeight': 985, 'amount': 997}
+[2026-06-10 13:57:50] humanize profile idle scroll 2/2: sleep 5.4s
+[2026-06-10 13:57:55] humanize profile idle reading: sleep 4.9s
+[2026-06-10 13:57:57] keep-awake enabled with SetThreadExecutionState
+[2026-06-10 13:58:00] humanize before opening video: sleep 7.1s
+[2026-06-10 13:58:10] humanize video reading: sleep 4.9s
+[2026-06-10 13:58:16] video 5 rows=1 status=ok
+[2026-06-10 13:58:16] checkpoint wrote Excel rows=51: C:\Users\Junzhang\Desktop\全自动混剪项目升级版\douyin_creator_tracker\outputs\douyin_all_collected_incremental_20260610_133310.xlsx
+[2026-06-10 13:58:16] collecting profile 8/8 video 6/17: 7649427509343967931
+[2026-06-10 13:58:19] profile idle scroll 1/2: {'tag': 'DIV', 'cls': 'parent-route-container tmAgOewN route-scroll-container LYhLJEMy', 'scrollTop': 739.375, 'scrollHeight': 1724, 'clientHeight': 985, 'amount': 929}
+[2026-06-10 13:58:19] humanize profile idle scroll 1/2: sleep 5.8s
+[2026-06-10 13:58:25] profile idle scroll 2/2: {'tag': 'DIV', 'cls': 'parent-route-container tmAgOewN route-scroll-container LYhLJEMy', 'scrollTop': 1537.5, 'scrollHeight': 3707, 'clientHeight': 985, 'amount': 798}
+[2026-06-10 13:58:25] humanize profile idle scroll 2/2: sleep 4.4s
+[2026-06-10 13:58:30] humanize before opening video: sleep 8.1s
+[2026-06-10 13:58:41] humanize video reading: sleep 4.0s
+[2026-06-10 13:58:42] keep-awake enabled with SetThreadExecutionState
+[2026-06-10 13:58:46] video 6 rows=1 status=ok
+[2026-06-10 13:58:46] checkpoint wrote Excel rows=52: C:\Users\Junzhang\Desktop\全自动混剪项目升级版\douyin_creator_tracker\outputs\douyin_all_collected_incremental_20260610_133310.xlsx
+[2026-06-10 13:58:46] collecting profile 8/8 video 7/17: 7649427252682674545
+[2026-06-10 13:58:49] profile idle scroll 1/2: {'tag': 'DIV', 'cls': 'parent-route-container tmAgOewN route-scroll-container LYhLJEMy', 'scrollTop': 0, 'scrollHeight': 1724, 'clientHeight': 985, 'amount': -1139}
+[2026-06-10 13:58:49] humanize profile idle scroll 1/2: sleep 6.2s
+[2026-06-10 13:58:55] profile idle scroll 2/2: {'tag': 'DIV', 'cls': 'parent-route-container tmAgOewN route-scroll-container LYhLJEMy', 'scrollTop': 965, 'scrollHeight': 3707, 'clientHeight': 985, 'amount': 965}
+[2026-06-10 13:58:55] humanize profile idle scroll 2/2: sleep 6.2s
+[2026-06-10 13:59:01] humanize before opening video: sleep 5.1s
+[2026-06-10 13:59:09] humanize video reading: sleep 4.5s
+[2026-06-10 13:59:15] video 7 rows=1 status=ok
+[2026-06-10 13:59:15] checkpoint wrote Excel rows=53: C:\Users\Junzhang\Desktop\全自动混剪项目升级版\douyin_creator_tracker\outputs\douyin_all_collected_incremental_20260610_133310.xlsx
+[2026-06-10 13:59:15] collecting profile 8/8 video 8/17: 7649358780911796731
+[2026-06-10 13:59:18] profile idle scroll 1/1: {'tag': 'DIV', 'cls': 'parent-route-container tmAgOewN route-scroll-container LYhLJEMy', 'scrollTop': 739.375, 'scrollHeight': 1724, 'clientHeight': 985, 'amount': 1127}
+[2026-06-10 13:59:18] humanize profile idle scroll 1/1: sleep 6.5s
+[2026-06-10 13:59:25] humanize profile idle reading: sleep 8.5s
+[2026-06-10 13:59:27] keep-awake enabled with SetThreadExecutionState
+[2026-06-10 13:59:33] humanize before opening video: sleep 5.3s
+[2026-06-10 13:59:41] humanize video reading: sleep 4.6s
+[2026-06-10 13:59:47] video 8 rows=1 status=ok
+[2026-06-10 13:59:47] checkpoint wrote Excel rows=54: C:\Users\Junzhang\Desktop\全自动混剪项目升级版\douyin_creator_tracker\outputs\douyin_all_collected_incremental_20260610_133310.xlsx
+[2026-06-10 13:59:47] collecting profile 8/8 video 9/17: 7649341381970167205
+[2026-06-10 13:59:50] profile idle scroll 1/1: {'tag': 'DIV', 'cls': 'parent-route-container tmAgOewN route-scroll-container LYhLJEMy', 'scrollTop': 858.75, 'scrollHeight': 2716, 'clientHeight': 985, 'amount': 859}
+[2026-06-10 13:59:50] humanize profile idle scroll 1/1: sleep 6.8s
+[2026-06-10 13:59:57] humanize profile idle reading: sleep 4.4s
+[2026-06-10 14:00:02] humanize before opening video: sleep 3.4s
+[2026-06-10 14:00:08] humanize video reading: sleep 3.9s
+[2026-06-10 14:00:12] keep-awake enabled with SetThreadExecutionState
+[2026-06-10 14:00:13] video 9 rows=1 status=ok
+[2026-06-10 14:00:13] checkpoint wrote Excel rows=55: C:\Users\Junzhang\Desktop\全自动混剪项目升级版\douyin_creator_tracker\outputs\douyin_all_collected_incremental_20260610_133310.xlsx
+[2026-06-10 14:00:13] collecting profile 8/8 video 10/17: 7649216461466109553
+[2026-06-10 14:00:16] profile idle scroll 1/1: {'tag': 'DIV', 'cls': 'parent-route-container tmAgOewN route-scroll-container LYhLJEMy', 'scrollTop': 739.375, 'scrollHeight': 1724, 'clientHeight': 985, 'amount': 848}
+[2026-06-10 14:00:16] humanize profile idle scroll 1/1: sleep 4.5s
+[2026-06-10 14:00:20] humanize profile idle reading: sleep 3.5s
+[2026-06-10 14:00:24] humanize before opening video: sleep 5.9s
+[2026-06-10 14:00:33] humanize video reading: sleep 3.4s
+[2026-06-10 14:00:37] video 10 rows=1 status=ok
+[2026-06-10 14:00:37] checkpoint wrote Excel rows=56: C:\Users\Junzhang\Desktop\全自动混剪项目升级版\douyin_creator_tracker\outputs\douyin_all_collected_incremental_20260610_133310.xlsx
+[2026-06-10 14:00:37] collecting profile 8/8 video 11/17: 7649081881766850033
+[2026-06-10 14:00:40] profile idle scroll 1/1: {'tag': 'DIV', 'cls': 'parent-route-container tmAgOewN route-scroll-container LYhLJEMy', 'scrollTop': 0, 'scrollHeight': 1724, 'clientHeight': 985, 'amount': -1045}
+[2026-06-10 14:00:40] humanize profile idle scroll 1/1: sleep 4.0s
+[2026-06-10 14:00:44] humanize before opening video: sleep 8.9s
+[2026-06-10 14:00:56] humanize video reading: sleep 4.8s
+[2026-06-10 14:00:57] keep-awake enabled with SetThreadExecutionState
+[2026-06-10 14:01:02] video 11 rows=1 status=ok
+[2026-06-10 14:01:02] checkpoint wrote Excel rows=57: C:\Users\Junzhang\Desktop\全自动混剪项目升级版\douyin_creator_tracker\outputs\douyin_all_collected_incremental_20260610_133310.xlsx
+[2026-06-10 14:01:02] collecting profile 8/8 video 12/17: 7649081449518382833
+[2026-06-10 14:01:05] profile idle scroll 1/3: {'tag': 'DIV', 'cls': 'parent-route-container tmAgOewN route-scroll-container LYhLJEMy', 'scrollTop': 0, 'scrollHeight': 1724, 'clientHeight': 985, 'amount': -918}
+[2026-06-10 14:01:05] humanize profile idle scroll 1/3: sleep 6.5s
+[2026-06-10 14:01:12] profile idle scroll 2/3: {'tag': 'DIV', 'cls': 'parent-route-container tmAgOewN route-scroll-container LYhLJEMy', 'scrollTop': 1171.875, 'scrollHeight': 3707, 'clientHeight': 985, 'amount': 1172}
+[2026-06-10 14:01:12] humanize profile idle scroll 2/3: sleep 7.1s
+[2026-06-10 14:01:19] profile idle scroll 3/3: {'tag': 'DIV', 'cls': 'parent-route-container tmAgOewN route-scroll-container LYhLJEMy', 'scrollTop': 2050.625, 'scrollHeight': 3707, 'clientHeight': 985, 'amount': 879}
+[2026-06-10 14:01:19] humanize profile idle scroll 3/3: sleep 5.5s
+[2026-06-10 14:01:24] humanize before opening video: sleep 5.8s
+[2026-06-10 14:01:33] humanize video reading: sleep 4.9s
+[2026-06-10 14:01:39] video 12 rows=1 status=ok
+[2026-06-10 14:01:39] checkpoint wrote Excel rows=58: C:\Users\Junzhang\Desktop\全自动混剪项目升级版\douyin_creator_tracker\outputs\douyin_all_collected_incremental_20260610_133310.xlsx
+[2026-06-10 14:01:39] collecting profile 8/8 video 13/17: 7649080883497351793
+[2026-06-10 14:01:42] keep-awake enabled with SetThreadExecutionState
+[2026-06-10 14:01:42] profile idle scroll 1/1: {'tag': 'DIV', 'cls': 'parent-route-container tmAgOewN route-scroll-container LYhLJEMy', 'scrollTop': 739.375, 'scrollHeight': 1724, 'clientHeight': 985, 'amount': 1118}
+[2026-06-10 14:01:42] humanize profile idle scroll 1/1: sleep 3.6s
+[2026-06-10 14:01:46] humanize before opening video: sleep 6.7s
+[2026-06-10 14:01:56] humanize video reading: sleep 4.1s
+[2026-06-10 14:02:01] video 13 rows=1 status=ok
+[2026-06-10 14:02:02] checkpoint wrote Excel rows=59: C:\Users\Junzhang\Desktop\全自动混剪项目升级版\douyin_creator_tracker\outputs\douyin_all_collected_incremental_20260610_133310.xlsx
+[2026-06-10 14:02:02] collecting profile 8/8 video 14/17: 7649080565317419377
+[2026-06-10 14:02:05] profile idle scroll 1/1: {'tag': 'DIV', 'cls': 'parent-route-container tmAgOewN route-scroll-container LYhLJEMy', 'scrollTop': 845, 'scrollHeight': 2716, 'clientHeight': 985, 'amount': 845}
+[2026-06-10 14:02:05] humanize profile idle scroll 1/1: sleep 4.3s
+[2026-06-10 14:02:09] humanize profile idle reading: sleep 6.3s
+[2026-06-10 14:02:15] humanize before opening video: sleep 6.1s
+[2026-06-10 14:02:24] humanize video reading: sleep 4.6s
+[2026-06-10 14:02:27] keep-awake enabled with SetThreadExecutionState
+[2026-06-10 14:02:30] video 14 rows=1 status=ok
+[2026-06-10 14:02:30] checkpoint wrote Excel rows=60: C:\Users\Junzhang\Desktop\全自动混剪项目升级版\douyin_creator_tracker\outputs\douyin_all_collected_incremental_20260610_133310.xlsx
+[2026-06-10 14:02:30] collecting profile 8/8 video 15/17: 7649080346247981681
+[2026-06-10 14:02:33] profile idle scroll 1/2: {'tag': 'DIV', 'cls': 'parent-route-container tmAgOewN route-scroll-container LYhLJEMy', 'scrollTop': 739.375, 'scrollHeight': 1724, 'clientHeight': 985, 'amount': 1130}
+[2026-06-10 14:02:33] humanize profile idle scroll 1/2: sleep 3.5s
+[2026-06-10 14:02:37] profile idle scroll 2/2: {'tag': 'DIV', 'cls': 'parent-route-container tmAgOewN route-scroll-container LYhLJEMy', 'scrollTop': 1633.125, 'scrollHeight': 3707, 'clientHeight': 985, 'amount': 894}
+[2026-06-10 14:02:37] humanize profile idle scroll 2/2: sleep 7.5s
+[2026-06-10 14:02:44] humanize before opening video: sleep 3.6s
+[2026-06-10 14:02:51] humanize video reading: sleep 3.3s
+[2026-06-10 14:02:56] video 15 rows=1 status=ok
+[2026-06-10 14:02:56] checkpoint wrote Excel rows=61: C:\Users\Junzhang\Desktop\全自动混剪项目升级版\douyin_creator_tracker\outputs\douyin_all_collected_incremental_20260610_133310.xlsx
+[2026-06-10 14:02:56] collecting profile 8/8 video 16/17: 7649079964499939249
+[2026-06-10 14:02:59] profile idle scroll 1/2: {'tag': 'DIV', 'cls': 'parent-route-container tmAgOewN route-scroll-container LYhLJEMy', 'scrollTop': 0, 'scrollHeight': 1724, 'clientHeight': 985, 'amount': -958}
+[2026-06-10 14:02:59] humanize profile idle scroll 1/2: sleep 3.6s
+[2026-06-10 14:03:03] profile idle scroll 2/2: {'tag': 'DIV', 'cls': 'parent-route-container tmAgOewN route-scroll-container LYhLJEMy', 'scrollTop': 0, 'scrollHeight': 3707, 'clientHeight': 985, 'amount': -823}
+[2026-06-10 14:03:03] humanize profile idle scroll 2/2: sleep 7.0s
+[2026-06-10 14:03:10] humanize profile idle reading: sleep 6.8s
+[2026-06-10 14:03:12] keep-awake enabled with SetThreadExecutionState
+[2026-06-10 14:03:16] humanize before opening video: sleep 7.1s
+[2026-06-10 14:03:27] humanize video reading: sleep 4.5s
+[2026-06-10 14:03:33] video 16 rows=1 status=ok
+[2026-06-10 14:03:33] checkpoint wrote Excel rows=62: C:\Users\Junzhang\Desktop\全自动混剪项目升级版\douyin_creator_tracker\outputs\douyin_all_collected_incremental_20260610_133310.xlsx
+[2026-06-10 14:03:33] collecting profile 8/8 video 17/17: 7649079647284744113
+[2026-06-10 14:03:36] profile idle scroll 1/3: {'tag': 'DIV', 'cls': 'parent-route-container tmAgOewN route-scroll-container LYhLJEMy', 'scrollTop': 739.375, 'scrollHeight': 1724, 'clientHeight': 985, 'amount': 893}
+[2026-06-10 14:03:36] humanize profile idle scroll 1/3: sleep 7.9s
+[2026-06-10 14:03:44] profile idle scroll 2/3: {'tag': 'DIV', 'cls': 'parent-route-container tmAgOewN route-scroll-container LYhLJEMy', 'scrollTop': 1837.5, 'scrollHeight': 3707, 'clientHeight': 985, 'amount': 1098}
+[2026-06-10 14:03:44] humanize profile idle scroll 2/3: sleep 6.7s
+[2026-06-10 14:03:51] profile idle scroll 3/3: {'tag': 'DIV', 'cls': 'parent-route-container tmAgOewN route-scroll-container LYhLJEMy', 'scrollTop': 2828.75, 'scrollHeight': 5689, 'clientHeight': 985, 'amount': 991}
+[2026-06-10 14:03:51] humanize profile idle scroll 3/3: sleep 3.9s
+[2026-06-10 14:03:54] humanize before opening video: sleep 7.2s
+[2026-06-10 14:03:57] keep-awake enabled with SetThreadExecutionState
+[2026-06-10 14:04:04] humanize video reading: sleep 5.0s
+[2026-06-10 14:04:10] video 17 rows=1 status=ok
+[2026-06-10 14:04:10] checkpoint wrote Excel rows=63: C:\Users\Junzhang\Desktop\全自动混剪项目升级版\douyin_creator_tracker\outputs\douyin_all_collected_incremental_20260610_133310.xlsx
+[2026-06-10 14:04:11] wrote Excel: C:\Users\Junzhang\Desktop\全自动混剪项目升级版\douyin_creator_tracker\outputs\douyin_all_collected_incremental_20260610_133310.xlsx
+[2026-06-10 14:04:11] done rows=63
+[2026-06-10 14:04:11] keep-awake cleared
