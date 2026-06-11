@@ -1297,10 +1297,23 @@ def profile_url_variants(url: str) -> list[str]:
     return out
 
 
+def normalized_profile_url(url: str) -> str:
+    variants = profile_url_variants(url)
+    return variants[-1] if variants else ""
+
+
 def latest_collect_time_for_profile(index: dict[str, Any], profile_url: str) -> datetime | None:
     profiles = index.get("profiles", {})
     videos = index.get("videos", {})
+    candidate_keys: list[str] = []
+    normalized_target = normalized_profile_url(profile_url)
     for key in profile_url_variants(profile_url):
+        if key not in candidate_keys:
+            candidate_keys.append(key)
+    for key in profiles.keys():
+        if normalized_profile_url(key) == normalized_target and key not in candidate_keys:
+            candidate_keys.append(key)
+    for key in candidate_keys:
         bucket = profiles.get(key, {})
         video_ids = bucket.get("video_ids") or []
         latest_dt: datetime | None = None
@@ -1326,8 +1339,19 @@ def save_incremental_index(path: Path, data: dict[str, Any]) -> None:
 
 
 def mark_rows_in_index(index: dict[str, Any], profile_url: str, rows: list[dict[str, Any]]) -> None:
-    profile_bucket = index.setdefault("profiles", {}).setdefault(profile_url, {"video_ids": []})
-    profile_ids = set(profile_bucket.get("video_ids") or [])
+    profiles = index.setdefault("profiles", {})
+    profile_keys: list[str] = []
+    for key in profile_url_variants(profile_url):
+        if key not in profile_keys:
+            profile_keys.append(key)
+    normalized_target = normalized_profile_url(profile_url)
+    for key in list(profiles.keys()):
+        if normalized_profile_url(key) == normalized_target and key not in profile_keys:
+            profile_keys.append(key)
+    profile_buckets = [profiles.setdefault(key, {"video_ids": []}) for key in profile_keys]
+    profile_ids = set()
+    for bucket in profile_buckets:
+        profile_ids.update(bucket.get("video_ids") or [])
     videos = index.setdefault("videos", {})
     for row in rows:
         video_id = str(row.get("video_id") or "")
@@ -1342,7 +1366,9 @@ def mark_rows_in_index(index: dict[str, Any], profile_url: str, rows: list[dict[
             "collect_status": row.get("collect_status", ""),
             "collect_time": row.get("collect_time", ""),
         }
-    profile_bucket["video_ids"] = sorted(profile_ids)
+    merged_ids = sorted(profile_ids)
+    for bucket in profile_buckets:
+        bucket["video_ids"] = merged_ids
 
 
 def parse_args() -> argparse.Namespace:

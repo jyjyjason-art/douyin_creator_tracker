@@ -1,0 +1,30 @@
+[2026-06-11 01:04:53] start
+[2026-06-11 01:04:53] keep-awake enabled with SetThreadExecutionState
+[2026-06-11 01:04:53] connecting Chrome CDP: http://127.0.0.1:9222
+[2026-06-11 01:04:53] opening profile 1/1: https://www.douyin.com/user/MS4wLjABAAAAx8H4TS8yOdyuOavcZabgS1_biCj2MUNlb2Cfj8a1HC2ialQtio-kE4Jgge-bEBLr
+[2026-06-11 01:04:59] resolved profile URL: https://www.douyin.com/user/MS4wLjABAAAAx8H4TS8yOdyuOavcZabgS1_biCj2MUNlb2Cfj8a1HC2ialQtio-kE4Jgge-bEBLr
+[2026-06-11 01:04:59] creator name: 小桃运～（孕期穿搭）
+[2026-06-11 01:04:59] smart incremental window: last_collect=2026-06-10 22:00:32 day_gap=1 limit=20
+[2026-06-11 01:04:59] profile declared total videos: 895
+[2026-06-11 01:04:59] profile scan round=1 videos=54
+[2026-06-11 01:04:59] incremental skipped existing videos: 18
+[2026-06-11 01:04:59] collected video cards: 2
+[2026-06-11 01:04:59] collecting profile 1/1 video 1/2: 7649794465763730810
+[2026-06-11 01:04:59] humanize before opening video: sleep 6.5s
+[2026-06-11 01:05:08] humanize video reading: sleep 3.2s
+[2026-06-11 01:05:12] video 1 rows=1 status=ok
+[2026-06-11 01:05:12] checkpoint wrote Excel rows=1: C:\Users\Junzhang\Desktop\全自动混剪项目升级版\douyin_creator_tracker\outputs\douyin_first_collect_20260610_220142.xlsx
+[2026-06-11 01:05:12] collecting profile 1/1 video 2/2: 7649777744943050619
+[2026-06-11 01:05:15] profile idle scroll 1/2: {'tag': 'DIV', 'cls': 'parent-route-container tmAgOewN route-scroll-container LYhLJEMy', 'scrollTop': 983, 'scrollHeight': 2334, 'clientHeight': 822, 'amount': 983}
+[2026-06-11 01:05:15] humanize profile idle scroll 1/2: sleep 5.4s
+[2026-06-11 01:05:20] profile idle scroll 2/2: {'tag': 'DIV', 'cls': 'parent-route-container tmAgOewN route-scroll-container LYhLJEMy', 'scrollTop': 43, 'scrollHeight': 3895, 'clientHeight': 822, 'amount': -940}
+[2026-06-11 01:05:20] humanize profile idle scroll 2/2: sleep 4.8s
+[2026-06-11 01:05:25] humanize profile idle reading: sleep 3.8s
+[2026-06-11 01:05:29] humanize before opening video: sleep 5.4s
+[2026-06-11 01:05:37] humanize video reading: sleep 4.0s
+[2026-06-11 01:05:38] keep-awake enabled with SetThreadExecutionState
+[2026-06-11 01:05:42] video 2 rows=1 status=ok
+[2026-06-11 01:05:42] checkpoint wrote Excel rows=2: C:\Users\Junzhang\Desktop\全自动混剪项目升级版\douyin_creator_tracker\outputs\douyin_first_collect_20260610_220142.xlsx
+[2026-06-11 01:05:42] wrote Excel: C:\Users\Junzhang\Desktop\全自动混剪项目升级版\douyin_creator_tracker\outputs\douyin_first_collect_20260610_220142.xlsx
+[2026-06-11 01:05:42] done rows=2
+[2026-06-11 01:05:42] keep-awake cleared
